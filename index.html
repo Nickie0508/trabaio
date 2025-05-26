@@ -10,11 +10,10 @@
 <body>
 
  <div class="form-container">
-    <!-- Substitua o nome abaixo pelo nome correto da sua imagem -->
     <img src="avatar-cadastro.png" alt="Avatar fofo para cadastro" />
 
     <h2>Cadastro</h2>
-    <form action="#" method="POST">
+    <form id="formulario" action="#" method="POST">
       <label for="nome">Nome:</label>
       <input type="text" id="nome" name="nome" placeholder="Escreva seu nome completo" required />
 
@@ -29,8 +28,12 @@
 
       <input type="submit" value="Cadastrar" />
     </form>
+
+    <p id="mensagem">Cadastro realizado com sucesso! 🎉</p>
   </div>
 
+  <!-- Link para o JS externo -->
+  <script src="script.js"></script>
 
 </body>
 </html>
