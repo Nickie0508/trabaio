@@ -1,39 +1,25 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Cadastro de Usuário</title>
-  <link rel="stylesheet" href="paxta/estilo.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Planner</title>
+    <link href="FullCalendar/css/style_custom.css" rel="stylesheet">
+    
 
 </head>
 <body>
 
- <div class="form-container">
-    <img src="avatar-cadastro.png" alt="Avatar fofo para cadastro" />
+    <div id="container">
+        <div id='calendar'></div>
+    </div>
+        
 
-    <h2>Cadastro</h2>
-    <form id="formulario" action="#" method="POST">
-      <label for="nome">Nome:</label>
-      <input type="text" id="nome" name="nome" placeholder="Escreva seu nome completo" required />
-
-      <label for="idade">Idade:</label>
-      <input type="number" id="idade" name="idade" placeholder="Digite sua idade" required />
-
-      <label for="email">E-mail:</label>
-      <input type="email" id="email" name="email" placeholder="Digite seu e-mail" required />
-
-      <label for="senha">Senha:</label>
-      <input type="password" id="senha" name="senha" placeholder="Crie uma senha segura" required />
-
-      <input type="submit" value="Cadastrar" />
-    </form>
-
-    <p id="mensagem">Cadastro realizado com sucesso! 🎉</p>
-  </div>
-
-  <!-- Link para o JS externo -->
-  <script src="script.js"></script>
 
 </body>
+
+    <script src="FullCalendar/js/calendar_custom.js"></script> <!--configurações do calendário-->
+    <script src='FullCalendar/js/index.global.min.js'></script> <!--arquivo principal compactado-->
+    <script src="FullCalendar/js/core/locales-all.global.min.js"></script> <!--tradução pt-br compactada-->
+
 </html>

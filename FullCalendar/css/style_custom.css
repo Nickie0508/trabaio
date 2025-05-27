@@ -1,0 +1,33 @@
+
+body{
+    background-color: rgb(96, 149, 255);
+}
+
+#container {
+    max-width: 900px;       
+    margin: 20px auto;       
+    padding: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    border-radius: 8px;
+    background-color: #fff;
+}
+
+
+#calendar {
+    width: 100%;
+    min-height: 500px;       
+}
+
+
+@media (max-width: 800px) {
+    #calendar-container {
+        max-width: 100%;
+        margin: 10px;
+        padding: 5px;
+    }
+
+    #calendar {
+        min-height: 400px;
+    }
+}
+
