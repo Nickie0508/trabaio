@@ -4,16 +4,23 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Cadastro de Usuário</title>
-  <link rel="stylesheet" href="arquivosCadastro/css/estilo.css">
-
+  <link rel="stylesheet" href="../arquivosCadastro/css/estilo.css">
+  <style>
+    #mensagem {
+      display: none;
+      color: green;
+      font-weight: bold;
+      margin-top: 10px;
+    }
+  </style>
 </head>
 <body>
 
  <div class="form-container">
-    <img src="arquivosCadastro/img/avatar-cadastro.png" alt="Avatar fofo para cadastro" />
+    <img src="../arquivosCadastro/img/avatar-cadastro.png" alt="Avatar fofo para cadastro" />
 
     <h2>Cadastro</h2>
-    <form id="formulario" action="#" method="POST">
+    <form id="formulario">
       <label for="nome">Nome:</label>
       <input type="text" id="nome" name="nome" placeholder="Digite seu nome completo" required />
 
@@ -27,22 +34,24 @@
       <input type="password" id="senha" name="senha" placeholder="Crie uma senha segura" required />
 
       <input type="submit" value="Cadastrar" />
-      <a href="Calendário Completo/index.html">O CALENDARIO (teste)</a> 
     </form>
 
     <p id="mensagem">Cadastro realizado com sucesso! 🎉</p>
   </div>
 
-  <!-- Link para o JS externo -->
-  <script src="js/script.js"></script>
   <script>
-  document.getElementById('formulario').addEventListener('submit', function(event) {
-    event.preventDefault(); // Impede o envio tradicional do formulário
+    document.getElementById('formulario').addEventListener('submit', function(event) {
+      event.preventDefault(); // Impede envio tradicional
 
-    // Redireciona para o calendário após o cadastro
-    window.location.href = 'Calendário Completo/index.html';
-  });
-</script>
+      // Mostrar mensagem
+      document.getElementById('mensagem').style.display = 'block';
+
+      // Redireciona após 1.5s
+      setTimeout(function() {
+        window.location.href = '../Calendário Completo/index.html';
+      }, 1500);
+    });
+  </script>
 
 </body>
 </html>
