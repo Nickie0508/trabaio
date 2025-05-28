@@ -35,6 +35,14 @@
 
   <!-- Link para o JS externo -->
   <script src="js/script.js"></script>
+  <script>
+  document.getElementById('formulario').addEventListener('submit', function(event) {
+    event.preventDefault(); // Impede o envio tradicional do formulário
+
+    // Aqui você pode salvar os dados ou só redirecionar direto
+    window.location.href = '../FullCalendar/index.html'; // ou outro caminho, se for diferente
+  });
+</script>
 
 </body>
 </html>
