@@ -35,7 +35,14 @@
 
   <!-- Link para o JS externo -->
   <script src="js/script.js"></script>
-  
+  <script>
+  document.getElementById('formulario').addEventListener('submit', function(event) {
+    event.preventDefault(); // Impede o envio tradicional do formulário
+
+    // Redireciona para o calendário após o cadastro
+    window.location.href = 'Calendário Completo/index.html';
+  });
+</script>
 
 </body>
 </html>
