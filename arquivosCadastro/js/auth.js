@@ -1,0 +1,45 @@
+// js/auth.js
+import { auth } from "../../FullCalendar/dataBase/firebase.js";
+import {
+  createUserWithEmailAndPassword
+} from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+
+import {
+  getFirestore,
+  doc,
+  setDoc
+} from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+
+const db = getFirestore();
+
+document.getElementById('formulario').addEventListener('submit', async function(event) {
+  event.preventDefault(); 
+
+  const nome = document.getElementById("nome").value;
+  const idade = document.getElementById("idade").value;
+  const email = document.getElementById("email").value;
+  const senha = document.getElementById("senha").value;
+
+  try {
+    // cria o usuário no Firebase Authentication
+    const userCredential = await createUserWithEmailAndPassword(auth, email, senha);
+    const user = userCredential.user;
+
+    // salva dados adicionais no Firestore
+    await setDoc(doc(db, "usuarios", user.uid), {
+      nome: nome,
+      idade: idade,
+      email: email
+    });
+
+    document.getElementById("mensagem").textContent = "Cadastro realizado com sucesso! 🎉";
+    setTimeout(() => {
+      window.location.href = "FullCalendar/index.html"; // redireciona para o calendário
+    }, 1500);
+
+  } catch (error) {
+    console.error("Erro no cadastro:", error.message);
+    alert("Erro ao cadastrar: " + error.message);
+  }
+});
+

@@ -1,48 +1,85 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Cadastro de Usuário</title>
-  <link rel="stylesheet" href="arquivosCadastro/css/estilo.css">
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <title>Login - Planner</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f7f7f7;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+    .login-container {
+      background: white;
+      padding: 2rem;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      width: 320px;
+      text-align: center;
+    }
+    h2 {
+      margin-bottom: 1.5rem;
+    }
+    label {
+      display: block;
+      margin-bottom: 0.3rem;
+      font-weight: bold;
+      text-align: left;
+    }
+    input[type="email"], input[type="password"] {
+      width: 100%;
+      padding: 0.5rem;
+      margin-bottom: 1rem;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+    }
+    button {
+      width: 100%;
+      padding: 0.6rem;
+      background-color: #007bff;
+      border: none;
+      color: white;
+      font-weight: bold;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 1rem;
+    }
+    button:hover {
+      background-color: #0056b3;
+    }
+    p {
+      margin-top: 1rem;
+    }
+    a {
+      color: #007bff;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+  </style>
 </head>
 <body>
-
- <div class="form-container">
-    <img src="arquivosCadastro/img/avatar-cadastro.png" alt="Avatar fofo para cadastro" />
-
-    <h2>Cadastro</h2>
-    <form id="formulario" action="#" method="POST">
-      <label for="nome">Nome:</label>
-      <input type="text" id="nome" name="nome" placeholder="Digite seu nome completo" required />
-
-      <label for="idade">Idade:</label>
-      <input type="number" id="idade" name="idade" placeholder="Digite sua idade" required />
-
+    <div class="login-container">
+    <h2>Entrar</h2>
+    <form id="loginForm">
       <label for="email">E-mail:</label>
-      <input type="email" id="email" name="email" placeholder="Digite seu e-mail" required />
-
+      <input type="email" id="email" required placeholder="Digite seu e-mail" />
+      
       <label for="senha">Senha:</label>
-      <input type="password" id="senha" name="senha" placeholder="Crie uma senha segura" required />
-
-      <input type="submit" value="Cadastrar" />
-      <a href="Calendário Completo/index.html">O CALENDARIO (teste)</a> 
+      <input type="password" id="senha" required placeholder="Digite sua senha" />
+      
+      <button type="submit">Entrar</button>
     </form>
-
-    <p id="mensagem">Cadastro realizado com sucesso! 🎉</p>
+    <p>Não tem conta? <a href="cadastro.html">Cadastre-se aqui</a></p>
   </div>
 
-  <!-- Link para o JS externo -->
-  <script src="js/script.js"></script>
-  <script>
-  document.getElementById('formulario').addEventListener('submit', function(event) {
-    event.preventDefault(); // Impede o envio tradicional do formulário
-
-    // Redireciona para o calendário após o cadastro
-    window.location.href = 'Calendário Completo/index.html';
-  });
-</script>
-
+  <script type="module" src="arquivosCadastro/js/login.js"></script>
 </body>
 </html>
