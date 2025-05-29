@@ -39,7 +39,6 @@ document.getElementById('formulario').addEventListener('submit', async function(
 
   } catch (error) {
     console.error("Erro no cadastro:", error.message);
-    alert("Erro ao cadastrar: " + error.message);
   }
 });
 
