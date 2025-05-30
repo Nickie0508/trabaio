@@ -17,4 +17,3 @@ form.addEventListener("submit", async (event) => {
     alert("Erro ao fazer login: " + error.message);
   }
 });
-
