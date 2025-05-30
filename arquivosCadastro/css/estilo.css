@@ -68,15 +68,30 @@ input[type="submit"]:hover {
   background: linear-gradient(to right, #3d85c6, #6fa8dc);
 }
 
-.link-text {
+#mensagem {
+  display: none;
+  color: #31708f;
+  background-color: #d9edf7;
+  border: 1px solid #bce8f1;
+  padding: 12px 15px;
+  border-radius: 10px;
   margin-top: 15px;
+  font-size: 15px;
+  animation: fadeIn 0.6s ease-in-out;
+  position: relative;
+  text-align: center;
 }
 
-.input-group {
+#mensagem::before {
+  content: '✔️ ';
+  margin-right: 5px;
+}
+
+.senha-group {
   position: relative;
 }
 
-.toggle-password {
+.toggle-senha {
   position: absolute;
   top: 50%;
   right: 15px;
@@ -85,4 +100,50 @@ input[type="submit"]:hover {
   color: #3d85c6;
 }
 
+#forcaSenha {
+  margin-top: 5px;
+  height: 8px;
+  border-radius: 5px;
+  background-color: #ccc;
+  overflow: hidden;
+}
 
+#forcaSenha::after {
+  content: '';
+  display: block;
+  height: 100%;
+  width: 0%;
+  transition: width 0.3s ease-in-out;
+}
+
+.fraca #forcaSenha::after {
+  width: 30%;
+  background-color: #e74c3c;
+}
+
+.media #forcaSenha::after {
+  width: 60%;
+  background-color: #f39c12;
+}
+
+forte #forcaSenha::after {
+  width: 100%;
+  background-color: #2ecc71;
+}
+
+@media (max-width: 480px) {
+  .form-container {
+    padding: 20px;
+    width: 95%;
+  }
+
+  .form-container img {
+    width: 100px;
+    height: 100px;
+  }
+
+  input[type="submit"] {
+    font-size: 14px;
+    padding: 10px;
+  }
+}
