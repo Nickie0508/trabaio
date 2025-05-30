@@ -2,7 +2,7 @@ const form = document.getElementById('formulario');
 const senhaInput = document.getElementById('senha');
 const confirmarSenhaInput = document.getElementById('confirmar');
 const mensagem = document.getElementById('mensagem');
-const forcaSenha = document.getElementById('forcaSenha');
+const forcaSenha = document.getElementById('forca-senha');
 
 form.addEventListener('submit', function (e) {
   e.preventDefault();
@@ -42,6 +42,6 @@ senhaInput.addEventListener('input', () => {
 
 function togglePassword(id) {
   const input = document.getElementById(id);
-  const tipo = input.getAttribute('type') === 'password' ? 'text' : 'password';
-  input.setAttribute('type', tipo);
+  const type = input.getAttribute('type') === 'password' ? 'text' : 'password';
+  input.setAttribute('type', type);
 }
