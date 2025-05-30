@@ -1,6 +1,6 @@
 const form = document.getElementById('formulario');
 const senhaInput = document.getElementById('senha');
-const confirmarSenhaInput = document.getElementById('confirmarSenha');
+const confirmarSenhaInput = document.getElementById('confirmar');
 const mensagem = document.getElementById('mensagem');
 const forcaSenha = document.getElementById('forcaSenha');
 
@@ -40,9 +40,8 @@ senhaInput.addEventListener('input', () => {
   forcaSenha.className = nivel;
 });
 
-function toggleSenha(id, el) {
+function togglePassword(id) {
   const input = document.getElementById(id);
   const tipo = input.getAttribute('type') === 'password' ? 'text' : 'password';
   input.setAttribute('type', tipo);
-  el.classList.toggle('fa-eye-slash');
 }
