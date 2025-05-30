@@ -68,6 +68,32 @@ input[type="submit"]:hover {
   background: linear-gradient(to right, #3d85c6, #6fa8dc);
 }
 
+.input-group {
+  position: relative;
+  margin-top: 5px;
+}
+
+.input-group i {
+  position: absolute;
+  top: 50%;
+  left: 12px;
+  transform: translateY(-50%);
+  color: #5a7ca0;
+}
+
+.input-group input {
+  padding-left: 35px;
+}
+
+.toggle-password {
+  position: absolute;
+  top: 50%;
+  right: 12px;
+  transform: translateY(-50%);
+  cursor: pointer;
+  color: #3d85c6;
+}
+
 #mensagem {
   display: none;
   color: #31708f;
@@ -78,7 +104,6 @@ input[type="submit"]:hover {
   margin-top: 15px;
   font-size: 15px;
   animation: fadeIn 0.6s ease-in-out;
-  position: relative;
   text-align: center;
 }
 
@@ -87,21 +112,8 @@ input[type="submit"]:hover {
   margin-right: 5px;
 }
 
-.senha-group {
-  position: relative;
-}
-
-.toggle-senha {
-  position: absolute;
-  top: 50%;
-  right: 15px;
-  transform: translateY(-50%);
-  cursor: pointer;
-  color: #3d85c6;
-}
-
 #forcaSenha {
-  margin-top: 5px;
+  margin-top: 8px;
   height: 8px;
   border-radius: 5px;
   background-color: #ccc;
@@ -126,7 +138,7 @@ input[type="submit"]:hover {
   background-color: #f39c12;
 }
 
-forte #forcaSenha::after {
+.forte #forcaSenha::after {
   width: 100%;
   background-color: #2ecc71;
 }
@@ -147,4 +159,5 @@ forte #forcaSenha::after {
     padding: 10px;
   }
 }
+
 
