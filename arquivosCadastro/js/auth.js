@@ -10,7 +10,11 @@ import {
   setDoc
 } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
-const db = getFirestore();
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+import { firebaseConfig } from "../../FullCalendar/dataBase/firebase.js";
+
+const app = initializeApp(firebaseConfig); 
+const db = getFirestore(app);
 
 document.getElementById('formulario').addEventListener('submit', async function(event) {
   event.preventDefault(); 
@@ -39,6 +43,7 @@ document.getElementById('formulario').addEventListener('submit', async function(
 
   } catch (error) {
     console.error("Erro no cadastro:", error.message);
+    alert("Erro ao cadastrar: " + error.message);
   }
 });
 
