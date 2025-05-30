@@ -1,57 +1,53 @@
-// Seletores principais
 const form = document.getElementById('formulario');
 const mensagem = document.getElementById('mensagem');
 const senhaInput = document.getElementById('senha');
-const confirmaSenhaInput = document.getElementById('confirmaSenha');
-const forca = document.getElementById('forca');
+const confirmarSenhaInput = document.getElementById('confirmarSenha');
+const toggleSenha = document.getElementById('toggleSenha');
+const forcaSenha = document.getElementById('forcaSenha');
 
-// Dark Mode Toggle
-const toggle = document.getElementById("darkModeToggle");
-toggle.addEventListener("change", () => {
-  document.body.classList.toggle("dark");
+// Mostrar/ocultar senha
+toggleSenha.addEventListener('click', () => {
+  const type = senhaInput.type === 'password' ? 'text' : 'password';
+  senhaInput.type = type;
+  confirmarSenhaInput.type = type;
+  toggleSenha.classList.toggle('fa-eye-slash');
 });
 
-// Mostrar/Ocultar Senha
-function togglePassword(id) {
-  const input = document.getElementById(id);
-  input.type = input.type === "password" ? "text" : "password";
-}
-
-// Medidor de força da senha
-senhaInput.addEventListener("input", () => {
-  const val = senhaInput.value;
-  let strength = 0;
-  if (val.length >= 8) strength++;
-  if (/[A-Z]/.test(val)) strength++;
-  if (/[0-9]/.test(val)) strength++;
-  if (/[\W]/.test(val)) strength++;
-
-  const texto = ["Fraca", "Média", "Boa", "Forte"];
-  const cores = ["#e74c3c", "#f1c40f", "#27ae60", "#2ecc71"];
-  forca.textContent = texto[strength - 1] || "";
-  forca.style.color = cores[strength - 1] || "#ccc";
-});
-
-// Validação de envio do formulário
+// Validação e feedback
 form.addEventListener('submit', function (e) {
   e.preventDefault();
 
   const senha = senhaInput.value;
-  const confirmaSenha = confirmaSenhaInput.value;
+  const confirmarSenha = confirmarSenhaInput.value;
 
   if (senha.length < 6) {
     alert('A senha precisa ter pelo menos 6 caracteres!');
     return;
   }
 
-  if (senha !== confirmaSenha) {
+  if (senha !== confirmarSenha) {
     alert('As senhas não coincidem!');
     return;
   }
 
   mensagem.textContent = 'Cadastro realizado com sucesso!';
   mensagem.style.display = 'block';
-  mensagem.style.color = 'green';
   form.reset();
-  forca.textContent = ''; // limpa o medidor após envio
+  forcaSenha.style.backgroundColor = '#eee';
+});
+
+// Medidor de força da senha
+senhaInput.addEventListener('input', () => {
+  const senha = senhaInput.value;
+  let cor = '#ccc';
+
+  if (senha.length >= 6 && /[A-Z]/.test(senha) && /[0-9]/.test(senha)) {
+    cor = '#0f0'; // forte
+  } else if (senha.length >= 6) {
+    cor = '#ff0'; // média
+  } else {
+    cor = '#f00'; // fraca
+  }
+
+  forcaSenha.style.backgroundColor = cor;
 });
