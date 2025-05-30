@@ -2,16 +2,21 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Cadastro de Usuário</title>
-  <link rel="stylesheet" href="arquivosCadastro/css/estilo.css">
-  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="estilo.css" />
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 </head>
 <body>
+  <div class="toggle-theme">
+    <label class="switch">
+      <input type="checkbox" id="darkModeToggle">
+      <span class="slider"></span>
+    </label>
+  </div>
 
   <div class="form-container">
-    <img src="arquivosCadastro/img/avatar-cadastro.png" alt="Avatar fofo para cadastro" />
-
+    <img src="arquivosCadastro/img/avatar-cadastro.png" alt="Avatar" />
     <h2>Cadastro</h2>
     <form id="formulario" action="#" method="POST">
       <label for="nome">Nome:</label>
@@ -24,16 +29,25 @@
       <input type="email" id="email" name="email" placeholder="Digite seu e-mail" required />
 
       <label for="senha">Senha:</label>
-      <input type="password" id="senha" name="senha" placeholder="Crie uma senha segura" required />
+      <div class="input-group">
+        <input type="password" id="senha" name="senha" placeholder="Crie uma senha segura" required />
+        <i class="fas fa-eye toggle-password" onclick="togglePassword('senha')"></i>
+      </div>
+      <div id="senhaForca">Força da senha: <span id="forca"></span></div>
+
+      <label for="confirmaSenha">Confirmar Senha:</label>
+      <div class="input-group">
+        <input type="password" id="confirmaSenha" name="confirmaSenha" placeholder="Repita a senha" required />
+        <i class="fas fa-eye toggle-password" onclick="togglePassword('confirmaSenha')"></i>
+      </div>
 
       <input type="submit" value="Cadastrar" />
     </form>
 
-    <p>Já tem uma conta? <a href="index.html">Acesse aqui</a></p>
-
+    <p>Já tem uma conta? <a href="index.html">Faça o login</a></p>
     <p id="mensagem"></p>
   </div>
 
-  <script type="module" src="arquivosCadastro/js/auth.js"></script>
+  <script src="scripts.js"></script>
 </body>
 </html>
