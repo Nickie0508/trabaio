@@ -1,19 +1,9 @@
 const form = document.getElementById('formulario');
-const mensagem = document.getElementById('mensagem');
 const senhaInput = document.getElementById('senha');
 const confirmarSenhaInput = document.getElementById('confirmarSenha');
-const toggleSenha = document.getElementById('toggleSenha');
+const mensagem = document.getElementById('mensagem');
 const forcaSenha = document.getElementById('forcaSenha');
 
-// Mostrar/ocultar senha
-toggleSenha.addEventListener('click', () => {
-  const type = senhaInput.type === 'password' ? 'text' : 'password';
-  senhaInput.type = type;
-  confirmarSenhaInput.type = type;
-  toggleSenha.classList.toggle('fa-eye-slash');
-});
-
-// Validação e feedback
 form.addEventListener('submit', function (e) {
   e.preventDefault();
 
@@ -30,24 +20,29 @@ form.addEventListener('submit', function (e) {
     return;
   }
 
-  mensagem.textContent = 'Cadastro realizado com sucesso!';
   mensagem.style.display = 'block';
+  mensagem.innerText = 'Cadastro realizado com sucesso!';
   form.reset();
-  forcaSenha.style.backgroundColor = '#eee';
+  forcaSenha.className = '';
 });
 
-// Medidor de força da senha
 senhaInput.addEventListener('input', () => {
-  const senha = senhaInput.value;
-  let cor = '#ccc';
-
-  if (senha.length >= 6 && /[A-Z]/.test(senha) && /[0-9]/.test(senha)) {
-    cor = '#0f0'; // forte
-  } else if (senha.length >= 6) {
-    cor = '#ff0'; // média
+  const val = senhaInput.value;
+  let nivel = '';
+  if (val.length < 6) {
+    nivel = 'fraca';
+  } else if (val.match(/[A-Z]/) && val.match(/[0-9]/) && val.match(/[@$!%*?&#]/)) {
+    nivel = 'forte';
   } else {
-    cor = '#f00'; // fraca
+    nivel = 'media';
   }
 
-  forcaSenha.style.backgroundColor = cor;
+  forcaSenha.className = nivel;
 });
+
+function toggleSenha(id, el) {
+  const input = document.getElementById(id);
+  const tipo = input.getAttribute('type') === 'password' ? 'text' : 'password';
+  input.setAttribute('type', tipo);
+  el.classList.toggle('fa-eye-slash');
+}
