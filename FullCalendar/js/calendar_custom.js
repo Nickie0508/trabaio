@@ -1,8 +1,10 @@
+let calendar;
+
 document.addEventListener('DOMContentLoaded', function() {
 
-    var calendarEl = document.getElementById('calendar');
+    const calendarEl = document.getElementById('calendar');
 
-    var calendar = new FullCalendar.Calendar(calendarEl, {
+        calendar = new FullCalendar.Calendar(calendarEl, {
         initialView: 'dayGridMonth',
         locale: 'pt-br',
         themeSystem: 'bootstrap5',
@@ -16,13 +18,24 @@ document.addEventListener('DOMContentLoaded', function() {
         firstDay: 1,        //segunda como primeiro dia da semana
         navLinks: true,     //permite clicar nos numeros dos dias da semana enavegar para aquela data
         selectable: true,   //Permite clicar e arrastar sobre datas ou horários para selecionar um intervalo
-        selectMirror: true, //
+        selectMirror: true, // clicar arrastar vários dias para criar um evento mostra que foram selecionadas
         editable: true,     //Permite que os usuários arrastem e soltem eventos
         dayMaxEvents: true, //se tiver muitos eventos em uma dia o calendario mais mostras um "+"
+        selectOverlap: true,
 
+      
+        //MODAL para criar eventos
+        select: function(info){
+        document.getElementById('eventStart').value = info.startStr + "T00:00";
+        document.getElementById('eventEnd').value = info.endStr + "T00:00";
 
+        //mostrar o modal na tela
+          const eventModal = new bootstrap.Modal(document.getElementById('eventModal'));
+          eventModal.show();
+        },
+        
 
-        //teste de eventos, aqui vamos puxar do banco de dados ao invez de setar no codigo
+        /*
         events: [
         {
           title: 'All Day Event',
@@ -34,17 +47,41 @@ document.addEventListener('DOMContentLoaded', function() {
           end: '2025-05-30'
         },
       ],
-
-
-      /*
-      //MODAL AINDA PRECISA SER INCLUIDO CORRETAMENTE
-      eventClick: function(info){
-        const visualizarModal = new bootstrap.modal(document.getElementById("staticBackdrop"));
-        visualizarModal.show();
-      },
       */
 
-        });
+    });
+
+document.getElementById("eventForm").addEventListener("submit", function(e) {
+e.preventDefault();
+
+const title = document.getElementById("eventTitle").value;
+const description = document.getElementById("eventDescription").value;
+const start = document.getElementById("eventStart").value;
+const end = document.getElementById("eventEnd").value;
+
+if (!title || !start || !end) {
+  alert("Por favor, preencha todos os campos obrigatórios.");
+  return;
+}
+
+// ✅ Adiciona o evento no calendário
+calendar.addEvent({
+  title: title,
+  start: start,
+  end: end !== start ? end : null,
+  extendedProps: {
+    description: description
+  }
+});
+
+// Fecha o modal
+const modalEl = bootstrap.Modal.getInstance(document.getElementById('eventModal'));
+modalEl.hide();
+
+// Limpa o formulário
+e.target.reset();
+})
+
 
         calendar.render();
     });
