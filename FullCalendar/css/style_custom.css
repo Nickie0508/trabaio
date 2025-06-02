@@ -18,6 +18,9 @@ body{
     min-height: 500px;       
 }
 
+.fc-daygrid-day{
+    cursor: pointer;
+}
 
 @media (max-width: 800px) {
     #calendar-container {
@@ -28,6 +31,13 @@ body{
 
     #calendar {
         min-height: 550px;
+    }
+
+    .cores{
+        border: 1px solid rgb(177, 175, 175);
+        height: 40px;
+        overflow-x: auto;
+        border-radius: 5px;
     }
 }
 
