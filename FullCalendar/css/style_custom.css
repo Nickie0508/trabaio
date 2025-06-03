@@ -1,45 +1,72 @@
-
-body{
-    background-color: rgb(105, 155, 255);
+body {
+    background-color: #d7e8f7;
+    font-family: 'Quicksand', sans-serif;
 }
 
 #container {
-    max-width: 900px;       
-    margin: 20px auto;       
-    padding: 10px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.2);
-    border-radius: 8px;
-    background-color: #fff;
+    max-width: 900px;
+    margin: 30px auto;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 15px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
 }
 
 #calendar {
     width: 100%;
-    min-height: 500px;       
+    min-height: 500px;
+    border-radius: 10px;
+    overflow: hidden;
 }
 
-.fc-daygrid-day{
+.fc-daygrid-day {
     cursor: pointer;
+    transition: background-color 0.3s ease;
 }
 
-.cores{
-    overflow-x: auto;
-    border: 1px solid rgb(203, 203, 203);
-    border-radius: 5px;
+.fc-daygrid-day:hover {
+    background-color: #f1f8ff;
 }
 
+.modal-content {
+    border-radius: 15px;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+}
 
-@media (max-width: 800px) {
-    #calendar-container {
-        max-width: 100%;
-        margin: 10px;
-        padding: 5px;
-    }
+.btn-primary {
+    background: linear-gradient(to right, #6fa8dc, #3d85c6);
+    border: none;
+}
 
-    #calendar {
-        min-height: 550px;
-    }
+.btn-primary:hover {
+    background: linear-gradient(to right, #3d85c6, #6fa8dc);
+}
 
-    .cores{
-        height: 40px;
-    }
+.btn-danger {
+    background-color: #e74c3c;
+    border: none;
+}
+
+.btn-danger:hover {
+    background-color: #c0392b;
+}
+
+input[type="datetime-local"] {
+    border-radius: 10px;
+    border: 1px solid #b0c4de;
+    padding: 10px;
+}
+
+#eventDescription {
+    border: 1px solid #b0c4de;
+    border-radius: 10px;
+    padding: 10px;
+    background-color: #f9f9f9;
+}
+
+.cores {
+    padding: 10px;
+    border-radius: 10px;
+    border: 1px solid #b0c4de;
+    background-color: #f0f8ff;
 }
