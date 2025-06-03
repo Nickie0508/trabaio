@@ -10,14 +10,19 @@ onAuthStateChanged(auth, (user) => {
 
 // botão para fazer logout
 const botaoSair = document.getElementById("sair");
-if (botaoSair) {
-    botaoSair.addEventListener("click", () => {
+const botaoConfirmarSair = document.getElementById("botaoConfirmarSair");
+const modalDeslogar = new bootstrap.Modal(document.getElementById("modalDeslogar"));
+
+botaoSair.addEventListener("click", () => {
+    modalDeslogar.show();
+});
+
+botaoConfirmarSair.addEventListener("click", () => {
     signOut(auth)
-    .then(() => {
-        window.location.href = "../index.html";
+        .then(() => {
+            window.location.href = "../index.html";
         })
-    .catch((error) => {
-        alert("Erro ao sair: " + error.message);
-    });
-  });
-}
+        .catch((error) => {
+            alert("Erro ao sair: " + error.message);
+        });
+});
