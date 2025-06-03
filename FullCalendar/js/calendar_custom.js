@@ -37,7 +37,7 @@ let quill = new Quill('#eventDescription', {
         selectable: true,   //Permite clicar e arrastar sobre datas ou horários para selecionar um intervalo
         selectMirror: true, // clicar arrastar vários dias para criar um evento mostra que foram selecionadas
         editable: true,     //Permite que os usuários arrastem e soltem eventos
-        dayMaxEvents: 2, //se tiver muitos eventos em uma dia o calendario mais mostras um "+"
+        dayMaxEvents: 3, //se tiver muitos eventos em uma dia o calendario mais mostras um "+"
         selectOverlap: true,
 
       
