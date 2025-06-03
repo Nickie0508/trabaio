@@ -1,76 +1,105 @@
 @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600&display=swap');
 
+/* Variáveis globais */
+:root {
+  --cor-primaria: #3d85c6;
+  --cor-secundaria: #6fa8dc;
+  --cor-clara: #f0f8ff;
+  --cor-fundo: #d7e8f7;
+  --cor-texto: #2d4d79;
+  --cor-hover: #eef7ff;
+  --cor-erro: #e74c3c;
+  --radius: 12px;
+  --sombra: 0 10px 25px rgba(0, 0, 0, 0.1);
+  --transicao: 0.3s ease-in-out;
+}
+
+/* Estilo base */
 body {
   margin: 0;
   font-family: 'Quicksand', sans-serif;
-  background-color: #d7e8f7;
+  background-color: var(--cor-fundo);
+  line-height: 1.6;
+  letter-spacing: 0.3px;
 }
 
+*:focus {
+  outline: 2px solid var(--cor-primaria);
+}
+
+/* Container principal */
 #container {
   max-width: 900px;
   margin: 40px auto;
   padding: 30px;
-  background-color: #ffffff;
-  border-radius: 15px;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+  border-radius: var(--radius);
+  box-shadow: var(--sombra);
+  transition: var(--transicao);
 }
 
+/* Calendário */
 #calendar {
   width: 100%;
   min-height: 600px;
-  background-color: #ffffff;
-  border-radius: 12px;
+  border-radius: var(--radius);
   padding: 20px;
+  background-color: #fff;
 }
 
-/* FullCalendar: título e botões */
+/* Título e botões */
 .fc-toolbar-title {
   font-size: 24px;
-  color: #2d4d79;
+  color: var(--cor-texto);
   font-weight: 600;
 }
 
 .fc-button {
-  background: linear-gradient(to right, #6fa8dc, #3d85c6);
+  background: linear-gradient(to right, var(--cor-secundaria), var(--cor-primaria));
   border: none;
   border-radius: 8px;
   font-weight: bold;
   font-size: 13px;
   padding: 6px 12px;
   color: #fff;
-  transition: background 0.3s ease;
+  transition: var(--transicao);
 }
 
 .fc-button:hover {
-  background: linear-gradient(to right, #3d85c6, #6fa8dc);
+  background: linear-gradient(to right, var(--cor-primaria), var(--cor-secundaria));
 }
 
-/* Estilo dos dias */
+/* Dias do calendário */
 .fc-daygrid-day {
-  transition: background-color 0.2s;
+  transition: background-color 0.2s ease;
   border-radius: 6px;
 }
 
 .fc-daygrid-day:hover {
-  background-color: #eef7ff;
+  background-color: var(--cor-hover);
 }
 
-/* Modal de eventos */
+/* Modais */
 .modal-content {
   border-radius: 15px;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+  box-shadow: var(--sombra);
 }
 
 /* Inputs */
 input[type="datetime-local"],
-input[type="text"] {
+input[type="text"],
+input[type="email"],
+input[type="number"],
+input[type="password"] {
   border-radius: 10px;
   border: 1px solid #b0c4de;
   padding: 12px;
   width: 100%;
   font-size: 14px;
+  transition: var(--transicao);
 }
 
+/* Campo de descrição */
 #eventDescription {
   border: 1px solid #b0c4de;
   border-radius: 10px;
@@ -78,34 +107,36 @@ input[type="text"] {
   background-color: #f9f9f9;
 }
 
-/* Botões */
+/* Botões principais */
 .btn-primary {
-  background: linear-gradient(to right, #6fa8dc, #3d85c6);
+  background: linear-gradient(to right, var(--cor-secundaria), var(--cor-primaria));
   border: none;
   border-radius: 10px;
   font-weight: bold;
+  transition: var(--transicao);
 }
 
 .btn-primary:hover {
-  background: linear-gradient(to right, #3d85c6, #6fa8dc);
+  background: linear-gradient(to right, var(--cor-primaria), var(--cor-secundaria));
 }
 
 .btn-danger {
-  background-color: #e74c3c;
+  background-color: var(--cor-erro);
   border: none;
   border-radius: 10px;
+  transition: var(--transicao);
 }
 
 .btn-danger:hover {
   background-color: #c0392b;
 }
 
-/* Paleta de cores de eventos */
+/* Paleta de cores */
 .cores {
   padding: 10px;
   border-radius: 10px;
   border: 1px solid #b0c4de;
-  background-color: #f0f8ff;
+  background-color: var(--cor-clara);
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
@@ -116,9 +147,30 @@ input[type="text"] {
   height: 36px;
   border-radius: 50%;
   border: 2px solid transparent;
-  transition: border-color 0.3s ease;
+  transition: border-color var(--transicao);
 }
 
 .cores .btn:hover {
-  border-color: #2d4d79;
+  border-color: var(--cor-texto);
+}
+
+/* Ícones prontos para uso */
+.btn i {
+  margin-right: 5px;
+}
+
+/* Responsividade */
+@media (max-width: 600px) {
+  #container {
+    margin: 20px 10px;
+    padding: 20px;
+  }
+
+  .fc-toolbar-title {
+    font-size: 18px;
+  }
+
+  #calendar {
+    min-height: 500px;
+  }
 }
