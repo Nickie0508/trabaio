@@ -107,30 +107,24 @@ input[type="password"] {
   background-color: #f9f9f9;
 }
 
-/* Botões principais - substituído pelo estilo que você gostou */
+/* Botões principais */
 .btn-primary {
-  background: linear-gradient(to right, #6fa8dc, #3d85c6);
+  background: linear-gradient(to right, var(--cor-secundaria), var(--cor-primaria));
   border: none;
   border-radius: 10px;
   font-weight: bold;
-  transition: 0.3s ease-in-out;
-  color: white;
-  padding: 10px 20px;
-  cursor: pointer;
+  transition: var(--transicao);
 }
 
 .btn-primary:hover {
-  background: linear-gradient(to right, #3d85c6, #6fa8dc);
+  background: linear-gradient(to right, var(--cor-primaria), var(--cor-secundaria));
 }
 
 .btn-danger {
-  background-color: #e74c3c;
+  background-color: var(--cor-erro);
   border: none;
   border-radius: 10px;
-  transition: 0.3s ease-in-out;
-  color: white;
-  padding: 10px 20px;
-  cursor: pointer;
+  transition: var(--transicao);
 }
 
 .btn-danger:hover {
@@ -180,3 +174,4 @@ input[type="password"] {
     min-height: 500px;
   }
 }
+
