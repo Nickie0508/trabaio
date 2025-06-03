@@ -1,114 +1,124 @@
 @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600&display=swap');
 
 body {
-    background-color: #d7e8f7;
-    font-family: 'Quicksand', sans-serif;
+  margin: 0;
+  font-family: 'Quicksand', sans-serif;
+  background-color: #d7e8f7;
 }
 
 #container {
-    max-width: 900px;
-    margin: 40px auto;
-    padding: 25px;
-    background-color: #ffffff;
-    border-radius: 15px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  max-width: 900px;
+  margin: 40px auto;
+  padding: 30px;
+  background-color: #ffffff;
+  border-radius: 15px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
 }
 
 #calendar {
-    width: 100%;
-    min-height: 600px;
-    border-radius: 10px;
-    padding: 10px;
+  width: 100%;
+  min-height: 600px;
+  background-color: #ffffff;
+  border-radius: 12px;
+  padding: 20px;
 }
 
+/* FullCalendar: título e botões */
 .fc-toolbar-title {
-    font-size: 24px;
-    font-weight: 600;
-    color: #2d4d79;
+  font-size: 24px;
+  color: #2d4d79;
+  font-weight: 600;
 }
 
 .fc-button {
-    background: linear-gradient(to right, #6fa8dc, #3d85c6);
-    border: none;
-    border-radius: 8px;
-    padding: 5px 12px;
-    font-weight: bold;
-    font-size: 14px;
-    color: white;
-    transition: 0.3s ease;
+  background: linear-gradient(to right, #6fa8dc, #3d85c6);
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  font-size: 13px;
+  padding: 6px 12px;
+  color: #fff;
+  transition: background 0.3s ease;
 }
 
 .fc-button:hover {
-    background: linear-gradient(to right, #3d85c6, #6fa8dc);
+  background: linear-gradient(to right, #3d85c6, #6fa8dc);
 }
 
+/* Estilo dos dias */
 .fc-daygrid-day {
-    transition: background-color 0.3s ease;
-    border-radius: 6px;
+  transition: background-color 0.2s;
+  border-radius: 6px;
 }
 
 .fc-daygrid-day:hover {
-    background-color: #f0f8ff;
+  background-color: #eef7ff;
 }
 
+/* Modal de eventos */
 .modal-content {
-    border-radius: 15px;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  border-radius: 15px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
 }
 
-input[type="datetime-local"], input[type="text"] {
-    border-radius: 10px;
-    border: 1px solid #b0c4de;
-    padding: 12px;
-    font-size: 14px;
-    width: 100%;
+/* Inputs */
+input[type="datetime-local"],
+input[type="text"] {
+  border-radius: 10px;
+  border: 1px solid #b0c4de;
+  padding: 12px;
+  width: 100%;
+  font-size: 14px;
 }
 
 #eventDescription {
-    border: 1px solid #b0c4de;
-    border-radius: 10px;
-    padding: 10px;
-    background-color: #f9f9f9;
+  border: 1px solid #b0c4de;
+  border-radius: 10px;
+  padding: 10px;
+  background-color: #f9f9f9;
 }
 
+/* Botões */
 .btn-primary {
-    background: linear-gradient(to right, #6fa8dc, #3d85c6);
-    border: none;
-    border-radius: 8px;
-    font-weight: bold;
+  background: linear-gradient(to right, #6fa8dc, #3d85c6);
+  border: none;
+  border-radius: 10px;
+  font-weight: bold;
 }
 
 .btn-primary:hover {
-    background: linear-gradient(to right, #3d85c6, #6fa8dc);
+  background: linear-gradient(to right, #3d85c6, #6fa8dc);
 }
 
 .btn-danger {
-    background-color: #e74c3c;
-    border: none;
-    border-radius: 8px;
+  background-color: #e74c3c;
+  border: none;
+  border-radius: 10px;
 }
 
 .btn-danger:hover {
-    background-color: #c0392b;
+  background-color: #c0392b;
 }
 
+/* Paleta de cores de eventos */
 .cores {
-    padding: 10px;
-    border-radius: 10px;
-    border: 1px solid #b0c4de;
-    background-color: #f0f8ff;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px solid #b0c4de;
+  background-color: #f0f8ff;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
 }
 
 .cores .btn {
-    width: 36px;
-    height: 36px;
-    border: 2px solid transparent;
-    transition: 0.2s;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  transition: border-color 0.3s ease;
 }
 
 .cores .btn:hover {
-    border-color: #000;
+  border-color: #2d4d79;
 }
