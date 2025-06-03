@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600&display=swap');
+
 body {
     background-color: #d7e8f7;
     font-family: 'Quicksand', sans-serif;
@@ -5,56 +7,61 @@ body {
 
 #container {
     max-width: 900px;
-    margin: 30px auto;
-    padding: 20px;
+    margin: 40px auto;
+    padding: 25px;
     background-color: #ffffff;
     border-radius: 15px;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
 }
 
 #calendar {
     width: 100%;
-    min-height: 500px;
+    min-height: 600px;
     border-radius: 10px;
-    overflow: hidden;
+    padding: 10px;
+}
+
+.fc-toolbar-title {
+    font-size: 24px;
+    font-weight: 600;
+    color: #2d4d79;
+}
+
+.fc-button {
+    background: linear-gradient(to right, #6fa8dc, #3d85c6);
+    border: none;
+    border-radius: 8px;
+    padding: 5px 12px;
+    font-weight: bold;
+    font-size: 14px;
+    color: white;
+    transition: 0.3s ease;
+}
+
+.fc-button:hover {
+    background: linear-gradient(to right, #3d85c6, #6fa8dc);
 }
 
 .fc-daygrid-day {
-    cursor: pointer;
     transition: background-color 0.3s ease;
+    border-radius: 6px;
 }
 
 .fc-daygrid-day:hover {
-    background-color: #f1f8ff;
+    background-color: #f0f8ff;
 }
 
 .modal-content {
     border-radius: 15px;
-    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
 }
 
-.btn-primary {
-    background: linear-gradient(to right, #6fa8dc, #3d85c6);
-    border: none;
-}
-
-.btn-primary:hover {
-    background: linear-gradient(to right, #3d85c6, #6fa8dc);
-}
-
-.btn-danger {
-    background-color: #e74c3c;
-    border: none;
-}
-
-.btn-danger:hover {
-    background-color: #c0392b;
-}
-
-input[type="datetime-local"] {
+input[type="datetime-local"], input[type="text"] {
     border-radius: 10px;
     border: 1px solid #b0c4de;
-    padding: 10px;
+    padding: 12px;
+    font-size: 14px;
+    width: 100%;
 }
 
 #eventDescription {
@@ -64,9 +71,44 @@ input[type="datetime-local"] {
     background-color: #f9f9f9;
 }
 
+.btn-primary {
+    background: linear-gradient(to right, #6fa8dc, #3d85c6);
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+}
+
+.btn-primary:hover {
+    background: linear-gradient(to right, #3d85c6, #6fa8dc);
+}
+
+.btn-danger {
+    background-color: #e74c3c;
+    border: none;
+    border-radius: 8px;
+}
+
+.btn-danger:hover {
+    background-color: #c0392b;
+}
+
 .cores {
     padding: 10px;
     border-radius: 10px;
     border: 1px solid #b0c4de;
     background-color: #f0f8ff;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.cores .btn {
+    width: 36px;
+    height: 36px;
+    border: 2px solid transparent;
+    transition: 0.2s;
+}
+
+.cores .btn:hover {
+    border-color: #000;
 }
