@@ -27,6 +27,10 @@ body {
   outline: 2px solid var(--cor-primaria);
 }
 
+.navbar{
+  background-color: rgb(0, 0, 79) !important; 
+}
+
 /* Container principal */
 #container {
   max-width: 900px;
@@ -157,6 +161,9 @@ input[type="password"] {
 .btn i {
   margin-right: 5px;
 }
+
+
+
 
 /* Responsividade */
 @media (max-width: 800px) {

@@ -43,6 +43,12 @@ let quill = new Quill('#eventDescription', {
       
         //MODAL para criar eventos
         select: function(info){
+          // Impedir criação no passado
+          if (info.start < new Date().setHours(0, 0, 0, 0)) {
+            alertPersonalizado("Não é possível criar eventos no passado.")
+            return;
+          }
+
         document.getElementById('eventStart').value = info.startStr + "T00:00";
         document.getElementById('eventEnd').value = info.endStr + "T00:00";
         //mostrar o modal na tela
@@ -59,12 +65,47 @@ let quill = new Quill('#eventDescription', {
         document.getElementById("viewEventEnd").textContent = new Date(event.end).toLocaleString();
         document.getElementById("viewEventDescription").innerHTML = event.extendedProps.description || "";
 
+        //carregar valor do checkbox
+        const checkbox = document.getElementById("checkFeito");
+        checkbox.checked = event.extendedProps.done || false;
+        checkbox.onchange = null;
+        checkbox.onchange = function() {
+          const isChecked = this.checked;
+          event.setExtendedProp("done", isChecked);
+          calendar.refetchEvents(); 
+        };
+
         const viewModal = new bootstrap.Modal(document.getElementById("viewEventModal"));
         viewModal.show();
 
         selectedEvent = event;
-      }
+      },
 
+      //ativa quando um evento e arrastado
+      eventDrop: function(info) {
+        const now = new Date();
+        if (info.event.start < now.setHours(0, 0, 0, 0)) {
+          info.revert();
+          // Mostrar o toast
+          alertPersonalizado("Não é possível mover um evento para o passado.")
+        }
+},
+
+/*
+eventDidMount: function(info) {
+  const done = info.event.extendedProps.done;
+
+  if (done) {
+    // Suaviza a aparência e risca o título
+    info.el.style.opacity = "0.6";
+
+    const titleEl = info.el.querySelector('.fc-event-title');
+    if (titleEl) {
+      titleEl.style.textDecoration = "line-through";
+    }
+  }
+},
+*/
         
     });
 
@@ -98,7 +139,8 @@ if (editingEvent) {
     end: end,
     backgroundColor: color || undefined,
     extendedProps: {
-      description: description
+      description: description,
+      done: false
     }
   });
 }
@@ -178,6 +220,15 @@ function toLocalISOString(date) {
   const localDate = new Date(date.getTime() - offset * 60 * 1000);
   return localDate.toISOString().slice(0, 16);
 }
+
+//alerta personalizado
+function alertPersonalizado(message) {
+  const msg = document.getElementById("simpleToastMsg");
+  msg.textContent = message;
+  const toast = new bootstrap.Toast(document.getElementById("simpleToast"));
+  toast.show();
+}
+
 
 
         calendar.render();
