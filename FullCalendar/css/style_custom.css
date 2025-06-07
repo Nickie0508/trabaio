@@ -14,6 +14,54 @@
   --transicao: 0.3s ease-in-out;
 }
 
+/*temas de modo escuro*/
+body.modo-escuro {
+  background-color: #323232;
+  color: #e0e0e0;
+}
+
+body.modo-escuro #container,
+body.modo-escuro #calendar {
+  background-color: #464646;
+  color: #e0e0e0;
+}
+
+body.modo-escuro .navbar {
+  background-color: #1c1c1c !important;
+}
+
+body.modo-escuro .modal-content {
+  background-color: #464646;
+  color: #e0e0e0;
+}
+
+body.modo-escuro .form-control {
+  background-color: #2b2b2b;
+  color: #e0e0e0;
+  border: 1px solid #444;
+}
+
+body.modo-escuro .btn-close {
+  filter: invert(1);
+}
+
+body.modo-escuro .fc-toolbar-title {
+  color: #f0f0f0;
+}
+
+body.modo-escuro .fc-daygrid-day:hover{
+  background-color: #5b5b5b;
+}
+
+body.modo-escuro .quill{
+  background-color: #929292;
+}
+
+body.modo-escuro .cores{
+  background-color: #1c1c1c;
+}
+
+
 /* Estilo base */
 body {
   margin: 0;
@@ -45,7 +93,9 @@ body {
 /* Calendário */
 #calendar {
   width: 100%;
-  min-height: 600px;
+  height: auto !important;
+  min-height: unset;
+  overflow: visible !important;
   border-radius: var(--radius);
   padding: 20px;
   background-color: #fff;
@@ -87,6 +137,7 @@ body {
 .modal-content {
   border-radius: 15px;
   box-shadow: var(--sombra);
+  background-color: #fff;
 }
 
 /* Inputs */
@@ -162,6 +213,10 @@ input[type="password"] {
   margin-right: 5px;
 }
 
+#mudarTema{
+  width: 40px;
+  border-radius: 50%;
+}
 
 
 
@@ -177,6 +232,6 @@ input[type="password"] {
   }
 
   #calendar {
-    min-height: 600px;
+    min-height: 750px;
   }
 } 

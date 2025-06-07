@@ -24,17 +24,20 @@
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarConteudo" aria-controls="navbarConteudo" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-  
     <div class="collapse navbar-collapse" id="navbarConteudo">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
       </ul>
+      <!-- Botão de modo claro/escuro -->
+      <button id="mudarTema" class="btn btn-outline-light me-2" title="Alternar tema">
+        <i id="temaEscuro" class="bi bi-moon"></i><i id="temaClaro" class="bi bi-brightness-alt-low-fill"></i>
+      </button>
       <button id="sair" class="btn btn-danger"><i class="bi bi-box-arrow-left"></i></button>
     </div>
   </div>
 </nav>
 
 <!--alert mensagem-->
-<div class="toast bg-success text-light position-fixed top-0 m-3" id="simpleToast">
+<div class="toast bg-success text-light position-fixed top-0 m-3" style="z-index: 2000;" id="simpleToast">
   <div class="toast-body" id="simpleToastMsg">
   </div>
 </div>
@@ -80,7 +83,7 @@
           <input type="text" class="form-control" id="eventTitle" required>
         </div>
         <!--quill-->
-        <div class="mb-3">
+        <div class="mb-3 quill">
           <label for="eventDescription" class="form-label">Descrição</label>
           <div id="eventDescription" style="height: 200px;"></div>
         </div>
@@ -165,6 +168,6 @@
     <script src='js/bootstrap5/index.global.min.js'></script>
 
     <script type="module" src="js/deslogar.js"></script>
-
+    <script src="js/darkMode.js"></script>
 
 </html>

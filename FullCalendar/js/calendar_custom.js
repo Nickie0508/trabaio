@@ -1,3 +1,8 @@
+/*
+import { auth, db } from "../dataBase/firebase.js";
+import { doc, setDoc, getDocs, collection, deleteDoc } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+*/
+
 let calendar;
 let selectedEvent = null;
 let editingEvent = null;
@@ -68,11 +73,9 @@ let quill = new Quill('#eventDescription', {
         //carregar valor do checkbox
         const checkbox = document.getElementById("checkFeito");
         checkbox.checked = event.extendedProps.done || false;
-        checkbox.onchange = null;
-        checkbox.onchange = function() {
-          const isChecked = this.checked;
-          event.setExtendedProp("done", isChecked);
-          calendar.refetchEvents(); 
+        checkbox.onchange = () => {
+          event.setExtendedProp("done", checkbox.checked);
+          calendar.refetchEvents(); //  Atualiza os eventos e chama o eventDidMount
         };
 
         const viewModal = new bootstrap.Modal(document.getElementById("viewEventModal"));
@@ -91,21 +94,26 @@ let quill = new Quill('#eventDescription', {
         }
 },
 
-/*
-eventDidMount: function(info) {
-  const done = info.event.extendedProps.done;
+      eventDidMount: function(info) {
+        const done = info.event.extendedProps.done;
 
-  if (done) {
-    // Suaviza a aparência e risca o título
-    info.el.style.opacity = "0.6";
+        if (done) {
+          // Estiliza evento concluído
+          info.el.style.opacity = "0.6";
+          const titleEl = info.el.querySelector('.fc-event-title');
+          if (titleEl) {
+            titleEl.style.textDecoration = "line-through";
+          }
+        } else {
+          // Resetar estilo se "não feito"
+          info.el.style.opacity = "1";
+          const titleEl = info.el.querySelector('.fc-event-title');
+          if (titleEl) {
+            titleEl.style.textDecoration = "none";
+          }
+        }
+      },
 
-    const titleEl = info.el.querySelector('.fc-event-title');
-    if (titleEl) {
-      titleEl.style.textDecoration = "line-through";
-    }
-  }
-},
-*/
         
     });
 
@@ -123,6 +131,14 @@ if (!title || !start || !end) {
   alert("Por favor, preencha todos os campos obrigatórios.");
   return;
 }
+
+//impedir editar evento para uma data no passado
+  const now = new Date();
+  const startDate = new Date(start);
+  if (startDate < new Date(now.setHours(0, 0, 0, 0))) {
+    alertPersonalizado("Você não pode salvar eventos com data no passado.");
+    return;
+  }
 
 if (editingEvent) {
   editingEvent.setProp("title", title);
@@ -230,6 +246,49 @@ function alertPersonalizado(message) {
 }
 
 
+  calendar.render();
+});
 
-        calendar.render();
+/*
+// Função para salvar (criar ou editar) evento
+async function salvarEventoFirestore(userId, eventId, eventData) {
+  try {
+    const docRef = eventId
+      ? doc(db, "users", userId, "tasks", eventId)
+      : doc(collection(db, "users", userId, "tasks")); // cria novo ID automático
+
+    await setDoc(docRef, eventData);
+    return docRef.id;
+  } catch (error) {
+    console.error("Erro ao salvar evento:", error);
+    throw error;
+  }
+}
+
+// Função para carregar eventos
+async function carregarEventosFirestore(userId) {
+  const eventos = [];
+  try {
+    const querySnapshot = await getDocs(
+      collection(db, "users", userId, "tasks")
+    );
+    querySnapshot.forEach((doc) => {
+      eventos.push({ id: doc.id, ...doc.data() });
     });
+    return eventos;
+  } catch (error) {
+    console.error("Erro ao carregar eventos:", error);
+    throw error;
+  }
+}
+
+// Função para deletar evento
+async function deletarEventoFirestore(userId, eventId) {
+  try {
+    await deleteDoc(doc(db, "users", userId, "tasks", eventId));
+  } catch (error) {
+    console.error("Erro ao deletar evento:", error);
+    throw error;
+  }
+}
+*/

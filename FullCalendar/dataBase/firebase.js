@@ -1,5 +1,6 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
 import { getAuth } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+import { getFirestore } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
 const firebaseConfig = {
 apiKey: "AIzaSyDtGAbJ6Ws-KIY6iFobIoS_g90o5hXupO0",
@@ -12,11 +13,12 @@ measurementId: "G-3DVRN0HGCK"
 };
 
 const app = initializeApp(firebaseConfig);
-
 const auth = getAuth(app);
+const db = getFirestore(app);
 
-export { auth, firebaseConfig, app };
+export { auth, db, firebaseConfig, app };
 
-//apenas debug do firebase, pode ser removido depois
+//confirmaçao se estao sendo iniciados
 console.log("Firebase iniciado:", app);
 console.log("Auth iniciado:", auth);
+console.log("Firestore iniciado:", db);
