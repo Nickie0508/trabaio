@@ -42,8 +42,8 @@ let quill = new Quill('#eventDescription', {
         selectable: true,   //Permite clicar e arrastar sobre datas ou horários para selecionar um intervalo
         selectMirror: true, // clicar arrastar vários dias para criar um evento mostra que foram selecionadas
         editable: true,     //Permite que os usuários arrastem e soltem eventos
-        dayMaxEvents: 3, //se tiver muitos eventos em uma dia o calendario mais mostras um "+"
-        selectOverlap: true,
+        dayMaxEvents: 3,    //se tiver muitos eventos em uma dia o calendario mais mostras um "+"
+        selectOverlap: true, //permite criar eventos em dias que já existe outros eventos
 
       
         //MODAL para criar eventos
@@ -66,6 +66,7 @@ let quill = new Quill('#eventDescription', {
         const event = info.event;
         // Preencher o modal de visualização
         document.getElementById("viewEventTitle").textContent = event.title;
+        document.getElementById("viewEventValue").textContent = formatadorMoeda.format(event.extendedProps.valor);
         document.getElementById("viewEventStart").textContent = new Date(event.start).toLocaleString();
         document.getElementById("viewEventEnd").textContent = new Date(event.end).toLocaleString();
         document.getElementById("viewEventDescription").innerHTML = event.extendedProps.description || "";
@@ -121,11 +122,12 @@ let quill = new Quill('#eventDescription', {
 document.getElementById("eventForm").addEventListener("submit", function(e) {
 e.preventDefault();
 
-const title = document.getElementById("eventTitle").value;
+const title = document.getElementById("eventTitle").value.trim();
 const start = document.getElementById("eventStart").value;
 const end = document.getElementById("eventEnd").value;
 const description = quill.root.innerHTML;
 const color = document.getElementById("eventColor").value;
+const valorStr = document.getElementById("eventValue").value.trim();
 
 if (!title || !start || !end) {
   alert("Por favor, preencha todos os campos obrigatórios.");
@@ -140,12 +142,19 @@ if (!title || !start || !end) {
     return;
   }
 
+  // Converte para número ou null
+  let valor = valorStr ? parseFloat(valorStr) : null;
+  if (isNaN(valor) || valor <= 0) {
+    valor = null;
+  }
+
 if (editingEvent) {
   editingEvent.setProp("title", title);
   editingEvent.setStart(start);
   editingEvent.setEnd(end);
   editingEvent.setExtendedProp("description", description);
   if (color) editingEvent.setProp("backgroundColor", color);
+  editingEvent.setExtendedProp("valor", valor);
   editingEvent = null;
   selectedEvent = null;
 } else {
@@ -156,7 +165,8 @@ if (editingEvent) {
     backgroundColor: color || undefined,
     extendedProps: {
       description: description,
-      done: false
+      done: false,
+      valor: valor
     }
   });
 }
@@ -175,19 +185,20 @@ document.getElementById("editEventBtn").addEventListener("click", function () {
   if (!selectedEvent) return;
 
   document.getElementById("eventTitle").value = selectedEvent.title;
+  document.getElementById("eventValue").value = selectedEvent.extendedProps.valor
   document.getElementById("eventStart").value = toLocalISOString(selectedEvent.start);
   document.getElementById("eventEnd").value = toLocalISOString(selectedEvent.end);
-
   quill.root.innerHTML = selectedEvent.extendedProps.description || "";
+
+  // Restaurar a cor selecionada (se houver)
+  const color = selectedEvent.backgroundColor;
+  document.getElementById("eventColor").value = color || "";
 
   // Fechar modal de visualização
   bootstrap.Modal.getInstance(document.getElementById("viewEventModal")).hide();
   // Abrir modal de edição
   const editModal = new bootstrap.Modal(document.getElementById("eventModal"));
   
-  // Restaurar a cor selecionada (se houver)
-  const color = selectedEvent.backgroundColor;
-  document.getElementById("eventColor").value = color || "";
 
   // Marcar botão correspondente
   document.querySelectorAll('#colorButtons button').forEach(btn => {
@@ -199,8 +210,15 @@ document.getElementById("editEventBtn").addEventListener("click", function () {
   }
 });
 
-  
   editModal.show();
+
+  //cancelar edição de evento
+document.getElementById("cancelar").addEventListener('click', function(){
+  alertPersonalizado("Edição de evento cancelada.")
+  editingEvent = null
+  document.getElementById("eventTitle").value = "";
+  return;
+})
 
   editingEvent = selectedEvent;
 });
@@ -236,6 +254,14 @@ function toLocalISOString(date) {
   const localDate = new Date(date.getTime() - offset * 60 * 1000);
   return localDate.toISOString().slice(0, 16);
 }
+
+// Cria um formatador para moeda brasileira (BRL)
+const formatadorMoeda = new Intl.NumberFormat('pt-BR', {
+    style: 'currency',
+    currency: 'BRL',
+    minimumFractionDigits: 2, 
+    maximumFractionDigits: 2  
+});
 
 //alerta personalizado
 function alertPersonalizado(message) {

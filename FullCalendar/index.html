@@ -34,7 +34,7 @@
           <a class="btn btn-outline-light me-1" href="#">Checklist</a>
         </li>
         <li class="nav-item">
-          <a class="btn btn-outline-light me-1" href="../Paginas/Financas.html">Finaças</a>
+          <a class="btn btn-outline-light me-1" href="Financas.html">Finaças</a>
         </li>
         <li class="nav-item">
           <a class="btn btn-outline-light me-1" href="#">Lembrete</a>
@@ -96,7 +96,12 @@
       <div class="modal-body">
         <div class="mb-3">
           <label for="eventTitle" class="form-label">Título</label>
-          <input type="text" class="form-control" id="eventTitle" required>
+          <input type="text" class="form-control" id="eventTitle" placeholder="Digite o titulo da sua tarefa." required>
+        </div>
+        <div class="mb-3">
+          <label for="eventValue" class="form-label">Valor do Gasto (R$)</label>
+          <input type="number" class="form-control" id="eventValue" placeholder="Ex: 1500">
+          <small class="form-text text-muted">Deixe em branco se não for um evento com gasto.</small>
         </div>
         <!--quill-->
         <div class="mb-3 quill">
@@ -130,7 +135,7 @@
 
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+        <button id="cancelar" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
         <button type="submit" class="btn btn-primary">Salvar Evento</button>
       </div>
     </form>
@@ -155,6 +160,7 @@
 
       <div class="modal-body">
         <h5 id="viewEventTitle"></h5>
+        <h4 id="viewEventValue"></h4>
         <p><strong>Início:</strong> <span id="viewEventStart"></span></p>
         <p><strong>Fim:</strong> <span id="viewEventEnd"></span></p>
         <p><strong>Descrição:</strong></p>
