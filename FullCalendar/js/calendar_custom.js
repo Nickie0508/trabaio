@@ -66,7 +66,7 @@ let quill = new Quill('#eventDescription', {
         const event = info.event;
         // Preencher o modal de visualização
         document.getElementById("viewEventTitle").textContent = event.title;
-        document.getElementById("viewEventValue").textContent = formatadorMoeda.format(event.extendedProps.valor);
+        document.getElementById("viewEventValue").textContent = event.extendedProps.valor ? formatadorMoeda.format(event.extendedProps.valor) : "";
         document.getElementById("viewEventStart").textContent = new Date(event.start).toLocaleString();
         document.getElementById("viewEventEnd").textContent = new Date(event.end).toLocaleString();
         document.getElementById("viewEventDescription").innerHTML = event.extendedProps.description || "";
@@ -127,7 +127,8 @@ const start = document.getElementById("eventStart").value;
 const end = document.getElementById("eventEnd").value;
 const description = quill.root.innerHTML;
 const color = document.getElementById("eventColor").value;
-const valorStr = document.getElementById("eventValue").value.trim();
+let valorStr = document.getElementById("eventValue").value.trim();
+valorStr = valorStr.replace(",", "."); //trocar vírgula por ponto
 
 if (!title || !start || !end) {
   alert("Por favor, preencha todos os campos obrigatórios.");
@@ -212,16 +213,19 @@ document.getElementById("editEventBtn").addEventListener("click", function () {
 
   editModal.show();
 
-  //cancelar edição de evento
+  //cancelar edição de evento -------------------------------------------
 document.getElementById("cancelar").addEventListener('click', function(){
-  alertPersonalizado("Edição de evento cancelada.")
   editingEvent = null
+  alertPersonalizado("Edição de evento cancelada.")
   document.getElementById("eventTitle").value = "";
+  document.getElementById("eventValue").value = "";
+  quill.root.innerHTML = "";
   return;
 })
 
   editingEvent = selectedEvent;
 });
+
 
 //botao de excluir
 document.getElementById("deleteEventBtn").addEventListener("click", function () {
