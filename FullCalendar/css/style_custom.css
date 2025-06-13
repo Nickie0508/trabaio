@@ -106,6 +106,14 @@ body {
   background-color: #fff;
 }
 
+.fc-event {
+  border: none !important; 
+}
+
+.fc-event:hover {
+  border: 1px solid rgb(108, 108, 108) !important; 
+}
+
 /* Título e botões */
 .fc-toolbar-title {
   font-size: 24px;
