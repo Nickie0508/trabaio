@@ -1,7 +1,7 @@
-/*
+
 import { auth, db } from "../dataBase/firebase.js";
 import { doc, setDoc, getDocs, collection, deleteDoc } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
-*/
+
 
 let calendar;
 let selectedEvent = null;
@@ -22,6 +22,32 @@ let quill = new Quill('#eventDescription', {
     ]
   }
 });
+
+    // Carregar eventos quando abrir o calendário
+    auth.onAuthStateChanged(async (user) => {
+  if (user) {
+    const userId = user.uid;
+    const eventos = await carregarEventosFirestore(userId);
+
+    eventos.forEach(ev => {
+      calendar.addEvent({
+        id: ev.id,
+        title: ev.title,
+        start: ev.start,
+        end: ev.end,
+        backgroundColor: ev.backgroundColor,
+        extendedProps: {
+          description: ev.description,
+          done: ev.done,
+          valor: ev.valor
+        }
+      });
+    });
+  } else {
+    window.location.href = "../index.html"; // se nao logado redireciona
+  }
+});
+
 
 
     const calendarEl = document.getElementById('calendar');
@@ -86,12 +112,42 @@ let quill = new Quill('#eventDescription', {
       },
 
       //ativa quando um evento e arrastado
-      eventDrop: function(info) {
+      eventDrop: async function(info) {
         const now = new Date();
         if (info.event.start < now.setHours(0, 0, 0, 0)) {
           info.revert();
           // Mostrar o toast
-          alertPersonalizado("Não é possível mover um evento para o passado.")
+          alertPersonalizado("Não é possível mover um evento para o passado.");
+          return;
+        }
+
+        // salva nova posição no firestore
+        const user = auth.currentUser;
+        if (!user) {
+          alert("Usuário não está logado.");
+          return;
+        }
+
+        const userId = user.uid;
+        const eventId = info.event.id;
+
+        const eventData = {
+          title: info.event.title,
+          start: info.event.start.toISOString(),
+          end: info.event.end ? info.event.end.toISOString() : info.event.start.toISOString(),
+          backgroundColor: info.event.backgroundColor,
+          description: info.event.extendedProps.description || "",
+          done: info.event.extendedProps.done || false,
+          valor: info.event.extendedProps.valor || null
+        };
+
+        try {
+          await salvarEventoFirestore(userId, eventId, eventData);
+          alertPersonalizado("Evento atualizado com sucesso.");
+        } catch (error) {
+          console.error("Erro ao atualizar evento no Firestore:", error);
+          alertPersonalizado("Erro ao atualizar evento.");
+          info.revert(); // Se falhar desfaz o movimento
         }
 },
 
@@ -119,7 +175,7 @@ let quill = new Quill('#eventDescription', {
     });
 
 //criar e editar os eventos na lista de eventos
-document.getElementById("eventForm").addEventListener("submit", function(e) {
+document.getElementById("eventForm").addEventListener("submit", async function(e) {
 e.preventDefault();
 
 const title = document.getElementById("eventTitle").value.trim();
@@ -130,8 +186,16 @@ const color = document.getElementById("eventColor").value;
 let valorStr = document.getElementById("eventValue").value.trim();
 valorStr = valorStr.replace(",", "."); //trocar vírgula por ponto
 
+//verifica usuário logado
+const user = auth.currentUser;
+if (!user) {
+  alert("Usuário não está logado.");
+  return;
+}
+const userId = user.uid;
+
 if (!title || !start || !end) {
-  alert("Por favor, preencha todos os campos obrigatórios.");
+  alertPersonalizado("Por favor, preencha todos os campos obrigatórios.");
   return;
 }
 
@@ -149,21 +213,32 @@ if (!title || !start || !end) {
     valor = null;
   }
 
+let eventId;
+let evento; 
+
 if (editingEvent) {
+  eventId = editingEvent.id;
+
   editingEvent.setProp("title", title);
   editingEvent.setStart(start);
   editingEvent.setEnd(end);
   editingEvent.setExtendedProp("description", description);
-  if (color) editingEvent.setProp("backgroundColor", color);
   editingEvent.setExtendedProp("valor", valor);
+  if (color) editingEvent.setProp("backgroundColor", color);
+
+  evento = editingEvent;
   editingEvent = null;
   selectedEvent = null;
+
 } else {
-  calendar.addEvent({
+  eventId = crypto.randomUUID(); //gera ID único
+
+  evento = calendar.addEvent({
+    id: eventId,
     title: title,
     start: start,
     end: end,
-    backgroundColor: color || undefined,
+    backgroundColor: color || "#3788d8",
     extendedProps: {
       description: description,
       done: false,
@@ -171,6 +246,20 @@ if (editingEvent) {
     }
   });
 }
+//Dados a serem salvos no Firestore
+const eventData = {
+  title: title,
+  start: start,
+  end: end,
+  backgroundColor: color || "#3788d8",
+  description: description,
+  done: evento.extendedProps.done || false,
+  valor: valor
+};
+
+//Salvar no Firestore
+await salvarEventoFirestore(userId, eventId, eventData);
+
 
 const modalEl = bootstrap.Modal.getInstance(document.getElementById('eventModal'));
 modalEl.hide();
@@ -228,14 +317,37 @@ document.getElementById("cancelar").addEventListener('click', function(){
 
 
 //botao de excluir
-document.getElementById("deleteEventBtn").addEventListener("click", function () {
-  if (selectedEvent) {
+document.getElementById("deleteEventBtn").addEventListener("click", async function () {
+  if (!selectedEvent) return;
+
+  const confirmDelete = confirm("Tem certeza que deseja excluir este evento?");
+  if (!confirmDelete) return;
+
+  // Verifica se o usuário está logado
+  const user = auth.currentUser;
+  if (!user) {
+    alert("Usuário não está logado.");
+    return;
+  }
+
+  const userId = user.uid;
+  const eventId = selectedEvent.id;
+
+  try {
+    // Remove do calendário visual
     selectedEvent.remove();
+    // Remove do Firestore
+    await deletarEventoFirestore(userId, eventId);
+    alertPersonalizado("Evento excluído com sucesso.");
+  } catch (error) {
+    console.error("Erro ao excluir evento:", error);
+    alertPersonalizado("Erro ao excluir evento.");
+  } finally {
     selectedEvent = null;
     bootstrap.Modal.getInstance(document.getElementById("viewEventModal")).hide();
+    document.getElementById("eventForm").reset();
+    quill.setContents([]);
   }
-document.getElementById("eventForm").reset();
-quill.setContents([]);
 });
 
 
@@ -279,14 +391,11 @@ function alertPersonalizado(message) {
   calendar.render();
 });
 
-/*
+//funçoes para o banco
 // Função para salvar (criar ou editar) evento
 async function salvarEventoFirestore(userId, eventId, eventData) {
   try {
-    const docRef = eventId
-      ? doc(db, "users", userId, "tasks", eventId)
-      : doc(collection(db, "users", userId, "tasks")); // cria novo ID automático
-
+    const docRef = doc(db, "users", userId, "tasks", eventId);
     await setDoc(docRef, eventData);
     return docRef.id;
   } catch (error) {
@@ -294,6 +403,7 @@ async function salvarEventoFirestore(userId, eventId, eventData) {
     throw error;
   }
 }
+
 
 // Função para carregar eventos
 async function carregarEventosFirestore(userId) {
@@ -321,4 +431,4 @@ async function deletarEventoFirestore(userId, eventId) {
     throw error;
   }
 }
-*/
+
