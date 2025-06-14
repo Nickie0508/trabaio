@@ -1,0 +1,24 @@
+body.modo-escuro {
+  background-color: #323232;
+  color: #e0e0e0;
+}
+
+body.modo-escuro #container,
+body.modo-escuro #calendar {
+  background-color: #464646;
+  color: #e0e0e0;
+}
+
+#listaTransacoes li {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 12px;
+}
+
+.entrada {
+    color: green;
+}
+
+.saida {
+    color: red;
+}
