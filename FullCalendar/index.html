@@ -18,35 +18,40 @@
     <title>teste</title>
 </head>
 <body>
-    <div class="sidebar left" id="menu"> 
-
-
-        <!--menuzin-->
-          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+<!--navbar-->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="index.html">Meu Calendário</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarConteudo" aria-controls="navbarConteudo" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarConteudo">
+      <!--links para outras paginas-->
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="btn btn-outline-light me-1" href="nota.html">Anotaçoes</a>
+          <a class="btn btn-outline-light me-1" href="#">Notas</a>
         </li>
         <li class="nav-item">
-          <a class="btn btn-outline-light me-1" href="checklist.html">Checklist</a>
+          <a class="btn btn-outline-light me-1" href="#">Checklist</a>
         </li>
         <li class="nav-item">
           <a class="btn btn-outline-light me-1" href="Financas.html">Finaças</a>
         </li>
         <li class="nav-item">
-          <a class="btn btn-outline-light me-1" href="lembrete.html">Lembrete</a>
+          <a class="btn btn-outline-light me-1" href="#">Lembrete</a>
         </li>
         <li class="nav-item">
-          <a class="btn btn-outline-light me-1" href="metas.html">Metas</a>
+          <a class="btn btn-outline-light me-1" href="#">Metas</a>
         </li>
       </ul>
-
-
-      <!--mudar tema!!-->
+      <!-- Botão de modo claro/escuro -->
       <button id="mudarTema" class="btn btn-outline-light me-2" title="Alternar tema">
         <i id="temaEscuro" class="bi bi-moon"></i><i id="temaClaro" class="bi bi-brightness-alt-low-fill"></i>
       </button>
       <button id="sair" class="btn btn-danger"><i class="bi bi-box-arrow-left"></i></button>
     </div>
+  </div>
+</nav>
 
     <!--alert mensagem-->
 <div class="toast bg-success text-light position-fixed top-0 m-3" style="z-index: 2000;" id="simpleToast">

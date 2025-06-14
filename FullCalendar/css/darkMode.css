@@ -44,3 +44,12 @@ body.modo-escuro .quill{
 body.modo-escuro .cores{
   background-color: #1c1c1c;
 }
+
+.navbar {
+  background-color: rgb(0, 0, 79) !important; 
+}
+
+.nav-item a {
+  margin-top: 3px;
+  width: 95px;
+}
