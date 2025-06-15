@@ -168,24 +168,32 @@ li.expanded .content {
     right: 15px;
 }
 
+/* BOTÕES COM FUNDO TRANSPARENTE E SEM AZUL */
+
 .btn-group button {
-    background-color: #557ddf;
-    color: white;
-    border: none;
-    border-radius: 18px;
-    padding: 7px 16px;
-    margin-left: 7px;
-    cursor: pointer;
-    font-size: 15px;
-    font-weight: 600;
-    box-shadow: 0 5px 13px rgba(85, 125, 223, 0.35);
+    background: none !important; /* fundo transparente */
+    color: #557ddf !important; /* azul suave */
+    border: none !important;
+    box-shadow: none !important;
+    padding: 7px 16px !important;
+    margin-left: 7px !important;
+    cursor: pointer !important;
+    font-size: 15px !important;
+    font-weight: 600 !important;
+    border-radius: 18px !important;
+    font-family: 'Comfortaa', cursive, 'Poppins', sans-serif !important;
     transition: background-color 0.3s;
-    font-family: 'Comfortaa', cursive, 'Poppins', sans-serif;
 }
 
 .btn-group button:hover {
-    background-color: #3d5cb5;
-    box-shadow: 0 7px 20px rgba(61, 92, 181, 0.5);
+    background-color: #dce6ff !important; /* leve fundo azul claro no hover */
+    box-shadow: none !important;
+}
+
+.btn-group button:focus {
+    outline: none !important;
+    background: transparent !important; /* tira fundo azul no foco */
+    box-shadow: none !important;
 }
 
 .notification {
