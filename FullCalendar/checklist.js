@@ -1,10 +1,12 @@
 const taskInput = document.getElementById('taskInput');
+const subtasksInput = document.getElementById('subtasksInput');
 const taskList = document.getElementById('taskList');
 const filterSelect = document.getElementById('filterSelect');
 const notification = document.getElementById('notification');
 const addBtn = document.getElementById('addBtn');
 
 let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+let editIndex = null;
 
 function showNotification(msg) {
     notification.innerText = msg;
@@ -30,44 +32,42 @@ function loadTasks() {
     });
 
     filteredTasks.forEach((task, index) => {
-        const taskDiv = document.createElement('div');
-        taskDiv.className = 'task';
-        if (task.completed) taskDiv.classList.add('completed');
-
-        const leftDiv = document.createElement('div');
-        leftDiv.className = 'task-left';
-
+        const li = document.createElement('li');
+        li.className = task.completed ? 'completed' : '';
+        
+        // checkbox
         const checkbox = document.createElement('input');
         checkbox.type = 'checkbox';
         checkbox.checked = task.completed;
+        checkbox.className = 'checkbox';
         checkbox.onclick = () => toggleCompleted(index);
+        li.appendChild(checkbox);
 
-        const title = document.createElement('div');
-        title.className = 'title';
-        title.innerText = task.title;
+        // title
+        const titleDiv = document.createElement('div');
+        titleDiv.className = 'title';
+        titleDiv.innerText = task.title;
+        li.appendChild(titleDiv);
 
-        leftDiv.appendChild(checkbox);
-        leftDiv.appendChild(title);
+        // subtasks
+        if (task.subtasks.length > 0) {
+            const subtasksDiv = document.createElement('div');
+            subtasksDiv.className = 'subtasks';
+            subtasksDiv.innerText = 'Subtarefas: ' + task.subtasks.join(', ');
+            li.appendChild(subtasksDiv);
+        }
 
-        const btns = document.createElement('div');
-        btns.className = 'buttons';
-        btns.innerHTML = `
+        // buttons
+        const btnGroup = document.createElement('div');
+        btnGroup.className = 'btn-group';
+        btnGroup.innerHTML = `
             <button onclick="editTask(${index})" title="Editar">✏️</button>
             <button onclick="deleteTask(${index})" title="Excluir">🗑️</button>
             <button onclick="toggleFavorite(${index})" title="Favoritar">${task.favorite ? '✨' : '⭐'}</button>
         `;
+        li.appendChild(btnGroup);
 
-        taskDiv.appendChild(leftDiv);
-        taskDiv.appendChild(btns);
-
-        const subDiv = document.createElement('div');
-        subDiv.className = 'subtasks';
-        if (task.subtasks.length > 0) {
-            subDiv.innerText = 'Subtarefas: ' + task.subtasks.join(', ');
-            taskDiv.appendChild(subDiv);
-        }
-
-        taskList.appendChild(taskDiv);
+        taskList.appendChild(li);
     });
 
     checkAllCompleted();
@@ -75,19 +75,31 @@ function loadTasks() {
 
 function addTask() {
     const title = taskInput.value.trim();
+    const subtasksText = subtasksInput.value.trim();
     if (title === '') {
         showNotification('⚠️ Digite uma tarefa!');
         return;
     }
 
-    const subtasks = prompt('Digite subtarefas separadas por vírgula (opcional):');
-    const subtaskList = subtasks ? subtasks.split(',').map(s => s.trim()).filter(s => s) : [];
+    const subtasks = subtasksText ? subtasksText.split(',').map(s => s.trim()).filter(s => s) : [];
 
-    tasks.push({ title, completed: false, favorite: false, subtasks: subtaskList });
+    if (editIndex !== null) {
+        // Atualizar tarefa existente
+        tasks[editIndex].title = title;
+        tasks[editIndex].subtasks = subtasks;
+        showNotification('💾 Tarefa atualizada!');
+        editIndex = null;
+        addBtn.innerText = '➕ Adicionar Tarefa';
+    } else {
+        // Adicionar nova tarefa
+        tasks.push({ title, completed: false, favorite: false, subtasks });
+        showNotification('✅ Tarefa adicionada!');
+    }
+
     saveTasks();
-    taskInput.value = '';
     loadTasks();
-    showNotification('✅ Tarefa adicionada!');
+    taskInput.value = '';
+    subtasksInput.value = '';
 }
 
 function toggleCompleted(index) {
@@ -97,16 +109,12 @@ function toggleCompleted(index) {
 }
 
 function editTask(index) {
-    const newTitle = prompt('Editar tarefa:', tasks[index].title);
-    if (newTitle === null) return;
-
-    const newSubtasks = prompt('Editar subtarefas (separadas por vírgula):', tasks[index].subtasks.join(', '));
-
-    tasks[index].title = newTitle.trim();
-    tasks[index].subtasks = newSubtasks ? newSubtasks.split(',').map(s => s.trim()).filter(s => s) : [];
-    saveTasks();
-    loadTasks();
-    showNotification('✏️ Tarefa editada!');
+    const task = tasks[index];
+    taskInput.value = task.title;
+    subtasksInput.value = task.subtasks.join(', ');
+    addBtn.innerText = '💾 Salvar';
+    editIndex = index;
+    taskInput.focus();
 }
 
 function deleteTask(index) {
@@ -131,15 +139,11 @@ function checkAllCompleted() {
     }
 }
 
-// Eventos
-addBtn.addEventListener('click', addTask);
 filterSelect.addEventListener('change', loadTasks);
-taskInput.addEventListener('keypress', e => {
-    if (e.key === 'Enter') addTask();
-});
+addBtn.addEventListener('click', addTask);
 
-// Inicializa lista
 loadTasks();
+
 
 
 
