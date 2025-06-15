@@ -1,9 +1,13 @@
 const taskInput = document.getElementById('taskInput');
+const addBtn = document.getElementById('addBtn');
 const taskList = document.getElementById('taskList');
 const filterSelect = document.getElementById('filterSelect');
 const notification = document.getElementById('notification');
 
 let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+
+// Adiciona o listener do botão para chamar addTask
+addBtn.addEventListener('click', addTask);
 
 function showNotification(msg) {
     notification.innerText = msg;
@@ -133,4 +137,5 @@ function checkAllCompleted() {
 filterSelect.addEventListener('change', loadTasks);
 
 loadTasks();
+
 
