@@ -1,16 +1,23 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bloco de notas</title>
+    <title>Bloco de Notas</title>
+    <link rel="stylesheet" href="blocoNotas.css">
 </head>
 <body>
-    bloco de notas!!
 
-    titulo ao bloco de notas 
-    podem ser varias "paginas"
-    ver minimizado permite ver apenas o titulo das "paginas" maximixado a nota completa ou em ate 30% 
-    para editar ou visualizar ao todo, um clique ja basta!
+    <h1>📓 Meu Bloco de Notas</h1>
+
+    <div class="note-container">
+        <input type="text" id="titleInput" placeholder="Título da anotação"><br><br>
+        <textarea id="noteInput" placeholder="Digite sua anotação..."></textarea><br>
+        <button onclick="addNote()">Salvar</button>
+    </div>
+
+    <ul id="noteList"></ul>
+
+    <script src="blocoNotas.js"></script>
 </body>
 </html>
