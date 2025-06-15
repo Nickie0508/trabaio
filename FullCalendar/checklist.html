@@ -1,11 +1,34 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Checklist</title>
+    <link rel="stylesheet" href="checklist.css" />
 </head>
 <body>
-    checklist!!
+
+    <h1>✅ Meu Checklist</h1>
+
+    <div class="task-container">
+        <input type="text" id="taskInput" placeholder="Digite uma tarefa..." />
+        <button onclick="addTask()">➕ Adicionar Tarefa</button>
+    </div>
+
+    <div class="controls">
+        <select id="filterSelect">
+            <option value="all">Todas</option>
+            <option value="completed">Concluídas</option>
+            <option value="pending">Pendentes</option>
+            <option value="favorites">Favoritas</option>
+        </select>
+    </div>
+
+    <div id="taskList" class="task-list"></div>
+
+    <div id="notification" class="notification"></div>
+
+    <script src="checklist.js"></script>
 </body>
 </html>
+
