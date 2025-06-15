@@ -10,8 +10,9 @@
 
     <h1>✅ Meu Checklist</h1>
 
-    <div class="task-container">
+    <div class="note-container task-container">
         <input type="text" id="taskInput" placeholder="Digite uma tarefa..." />
+        <input type="text" id="subtasksInput" placeholder="Subtarefas " />
         <button id="addBtn">➕ Adicionar Tarefa</button>
     </div>
 
@@ -24,11 +25,10 @@
         </select>
     </div>
 
-    <div id="taskList" class="task-list"></div>
+    <ul id="taskList"></ul>
 
     <div id="notification" class="notification"></div>
 
     <script src="checklist.js"></script>
 </body>
 </html>
-
