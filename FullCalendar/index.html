@@ -8,7 +8,7 @@
     <link href='https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css' rel='stylesheet'>
     
     <link href="css/style_custom.css" rel="stylesheet">
-    <link href="css/darkMode.css" rel="stylesheet">
+    <link href="css/temas.css" rel="stylesheet">
 
     <link rel="icon" href="img/planner_icon.png" type="image/png">
 
@@ -43,11 +43,20 @@
         <li class="nav-item">
           <a class="btn btn-outline-light me-1" href="#">Metas</a>
         </li>
+        <!--botao dropdown temas-->
+        <li class="nav-item">
+        <select id="selectTemas" class="form-select" aria-label="Default select example">
+          <option selected disabled>Temas</option>
+          <option value="temaPadrao">Padrão</option>
+          <option value="temaDarkMode">Dark</option>
+          <option value="temaFuturista">Futurista</option>
+          <option value="temaSunset">Sunset</option>
+          <option value="temaPsicodelico">Psicodélico</option>
+          <option value="temaGalaxy">Galaxy</option>
+          <option value="temaNature">Nature</option>
+        </select>
+        </li>
       </ul>
-      <!-- Botão de modo claro/escuro -->
-      <button id="mudarTema" class="btn btn-outline-light me-2" title="Alternar tema">
-        <i id="temaEscuro" class="bi bi-moon"></i><i id="temaClaro" class="bi bi-brightness-alt-low-fill"></i>
-      </button>
       <button id="sair" class="btn btn-danger"><i class="bi bi-box-arrow-left"></i></button>
     </div>
   </div>
@@ -195,6 +204,6 @@
     <script src='js/bootstrap5/index.global.min.js'></script>
 
     <script type="module" src="js/deslogar.js"></script>
-    <script src="js/darkMode.js"></script>
+    <script src="js/temas.js"></script>
 
 </html>

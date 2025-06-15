@@ -1,0 +1,281 @@
+/*temas de modo escuro*/
+body.temaDarkMode {
+  background-color: #323232;
+  color: #e0e0e0;
+}
+
+body.temaDarkMode #container,
+body.temaDarkMode #calendar {
+  background-color: #464646;
+  color: #e0e0e0;
+}
+
+body.temaDarkMode .navbar {
+  background-color: #1c1c1c !important;
+}
+
+body.temaDarkMode .modal-content {
+  background-color: #464646;
+  color: #e0e0e0;
+}
+
+body.temaDarkMode .form-control {
+  background-color: #2b2b2b;
+  color: #e0e0e0;
+  border: 1px solid #444;
+}
+
+body.temaDarkMode .btn-close {
+  filter: invert(1);
+}
+
+body.temaDarkMode .fc-toolbar-title {
+  color: #f0f0f0;
+}
+
+body.temaDarkMode .fc-daygrid-day:hover{
+  background-color: #5b5b5b;
+}
+
+body.temaDarkMode .quill{
+  background-color: #929292;
+}
+
+body.temaDarkMode .cores{
+  background-color: #1c1c1c;
+}
+
+
+/*temas*/
+body.temaFuturista {
+  background-color: #0f0f0f;
+  color: #00ffff;
+}
+
+body.temaFuturista #container,
+body.temaFuturista #calendar {
+  background-color: #1a1a1a;
+  color: #00ffff;
+}
+
+body.temaFuturista .navbar {
+  background-color: #00bcd4 !important;
+}
+
+body.temaFuturista .modal-content {
+  background-color: #121212;
+  color: #00ffff;
+}
+
+body.temaFuturista .form-control {
+  background-color: #2b2b2b;
+  color: #00ffff;
+  border: 1px solid #00ffff;
+}
+
+body.temaFuturista .btn-close {
+  filter: invert(1);
+}
+
+body.temaFuturista .fc-toolbar-title {
+  color: #00ffff;
+}
+
+body.temaFuturista .fc-daygrid-day:hover {
+  background-color: #333333;
+}
+
+body.temaFuturista .quill {
+  background-color: #1a1a1a;
+}
+
+body.temaFuturista .cores {
+  background-color: #00bcd4;
+}
+
+/*tema 2*/
+body.temaSunset {
+  background: linear-gradient(135deg, #ff7e5f, #feb47b);
+  color: #ffffff;
+}
+
+body.temaSunset #container,
+body.temaSunset #calendar {
+  background-color: rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+}
+
+body.temaSunset .navbar {
+  background: linear-gradient(90deg, #ff7e5f, #feb47b) !important;
+}
+
+body.temaSunset .modal-content {
+  background-color: rgba(255, 255, 255, 0.15);
+  color: #ffffff;
+}
+
+body.temaSunset .form-control {
+  background-color: #ffffff;
+  color: #000000;
+  border: 1px solid #ffffff;
+}
+
+body.temaSunset .btn-close {
+  filter: invert(1);
+}
+
+body.temaSunset .fc-toolbar-title {
+  color: #ffffff;
+}
+
+body.temaSunset .fc-daygrid-day:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+body.temaSunset .quill {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+body.temaSunset .cores {
+  background-color: rgba(255, 255, 255, 0.25);
+}
+
+/*tema 3*/
+body.temaPsicodelico {
+  background: linear-gradient(135deg, #00f260, #0575e6);
+  color: #ffffff;
+}
+
+body.temaPsicodelico #container,
+body.temaPsicodelico #calendar {
+  background-color: rgba(255, 255, 255, 0.15);
+  color: #ffffff;
+}
+
+body.temaPsicodelico .navbar {
+  background: linear-gradient(90deg, #0575e6, #00f260) !important;
+}
+
+body.temaPsicodelico .modal-content {
+  background-color: rgba(0, 0, 0, 0.4);
+  color: #ffffff;
+}
+
+body.temaPsicodelico .form-control {
+  background-color: #ffffff;
+  color: #000000;
+  border: 1px solid #ffffff;
+}
+
+body.temaPsicodelico .btn-close {
+  filter: invert(1);
+}
+
+body.temaPsicodelico .fc-toolbar-title {
+  color: #ffffff;
+}
+
+body.temaPsicodelico .fc-daygrid-day:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+body.temaPsicodelico .quill {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+body.temaPsicodelico .cores {
+  background-color: rgba(255, 255, 255, 0.25);
+}
+
+/*tema 4*/
+body.temaGalaxy {
+  background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+  color: #ffffff;
+}
+
+body.temaGalaxy #container,
+body.temaGalaxy #calendar {
+  background-color: rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+}
+
+body.temaGalaxy .navbar {
+  background: linear-gradient(90deg, #0f2027, #203a43, #2c5364) !important;
+}
+
+body.temaGalaxy .modal-content {
+  background-color: rgba(0, 0, 0, 0.5);
+  color: #ffffff;
+}
+
+body.temaGalaxy .form-control {
+  background-color: #2b2b2b;
+  color: #ffffff;
+  border: 1px solid #ffffff;
+}
+
+body.temaGalaxy .btn-close {
+  filter: invert(1);
+}
+
+body.temaGalaxy .fc-toolbar-title {
+  color: #ffffff;
+}
+
+body.temaGalaxy .fc-daygrid-day:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+body.temaGalaxy .quill {
+  background-color: rgba(255, 255, 255, 0.15);
+}
+
+body.temaGalaxy .cores {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+ /*tema 5*/
+ body.temaNature {
+  background-color: #2e7d32;
+  color: #e0e0e0;
+}
+
+body.temaNature #container,
+body.temaNature #calendar {
+  background-color: #a5d6a7;
+  color: #2e2e2e;
+}
+
+body.temaNature .navbar {
+  background-color: #1b5e20 !important;
+}
+
+body.temaNature .modal-content {
+  background-color: #81c784;
+  color: #2e2e2e;
+}
+
+body.temaNature .form-control {
+  background-color: #ffffff;
+  color: #000000;
+  border: 1px solid #444;
+}
+
+body.temaNature .btn-close {
+  filter: invert(1);
+}
+
+body.temaNature .fc-toolbar-title {
+  color: #f0f0f0;
+}
+
+body.temaNature .fc-daygrid-day:hover {
+  background-color: #4caf50;
+}
+
+body.temaNature .quill {
+  background-color: #c8e6c9;
+}
+
+body.temaNature .cores {
+  background-color: #a5d6a7;
+}

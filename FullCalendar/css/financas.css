@@ -4,3 +4,12 @@
     padding: 8px 12px;
 }
 
+.nav-item a{
+    margin-top: 3px;
+    width: 95px;
+}
+
+.nav-item #selectTemas{
+    margin-top: 3px;
+    width: 100px;
+}

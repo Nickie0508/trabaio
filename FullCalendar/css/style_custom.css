@@ -36,6 +36,11 @@ body {
   width: 95px;
 }
 
+.nav-item #selectTemas{
+  margin-top: 3px;
+  width: 100px;
+}
+
 /* Container principal */
 #container {
   max-width: 900px;
