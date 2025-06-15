@@ -1,4 +1,3 @@
-// Seletores dos elementos
 const titleInput = document.getElementById('titleInput');
 const noteInput = document.getElementById('noteInput');
 const noteList = document.getElementById('noteList');
@@ -8,7 +7,6 @@ const notification = document.getElementById('notification');
 
 let notes = JSON.parse(localStorage.getItem('notes')) || [];
 
-// Mostrar notificação
 function showNotification(msg) {
     notification.innerText = msg;
     notification.classList.add('show');
@@ -17,12 +15,10 @@ function showNotification(msg) {
     }, 2000);
 }
 
-// Salvar no localStorage
 function saveNotes() {
     localStorage.setItem('notes', JSON.stringify(notes));
 }
 
-// Carregar notas na tela
 function loadNotes() {
     let filteredNotes = [...notes];
 
@@ -41,8 +37,6 @@ function loadNotes() {
         filteredNotes.sort((a, b) => b.title.localeCompare(a.title));
     } else if (sort === 'dateAsc') {
         filteredNotes.sort((a, b) => a.date - b.date);
-    } else if (sort === 'favorite') {
-        filteredNotes.sort((a, b) => (b.favorite === true) - (a.favorite === true) || b.date - a.date);
     } else {
         filteredNotes.sort((a, b) => b.date - a.date);
     }
@@ -83,7 +77,6 @@ function loadNotes() {
     });
 }
 
-// Expandir/contrair nota
 function toggleContent(li) {
     const expanded = li.classList.contains('expanded');
     if (expanded) {
@@ -94,7 +87,6 @@ function toggleContent(li) {
     }
 }
 
-// Adicionar nova nota
 function addNote() {
     const title = titleInput.value.trim();
     const content = noteInput.value.trim();
@@ -112,7 +104,6 @@ function addNote() {
     showNotification('✅ Nota salva! ✍️');
 }
 
-// Editar nota
 function editNote(index) {
     const newTitle = prompt('✏️ Editar título:', notes[index].title);
     if (newTitle === null) return;
@@ -126,7 +117,6 @@ function editNote(index) {
     showNotification('✅ Nota editada! ✍️');
 }
 
-// Excluir nota
 function deleteNote(index) {
     if (!confirm('🗑️ Tem certeza que deseja excluir?')) return;
 
@@ -136,7 +126,6 @@ function deleteNote(index) {
     showNotification('🗑️ Nota excluída.');
 }
 
-// Copiar nota
 function copyNote(index) {
     const textToCopy = `Título: ${notes[index].title}\nAnotação: ${notes[index].content}`;
     navigator.clipboard.writeText(textToCopy).then(() => {
@@ -146,7 +135,6 @@ function copyNote(index) {
     });
 }
 
-// Favoritar / Desfavoritar
 function toggleFavorite(index) {
     notes[index].favorite = !notes[index].favorite;
     saveNotes();
@@ -155,8 +143,6 @@ function toggleFavorite(index) {
     showNotification(msg);
 }
 
-// Busca dinâmica
 searchInput.addEventListener('input', loadNotes);
 
-// Carregar na inicialização
 loadNotes();
