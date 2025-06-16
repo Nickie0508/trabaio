@@ -36,14 +36,20 @@ document.getElementById('formulario').addEventListener('submit', async function(
       email: email
     });
 
-    document.getElementById("mensagem").textContent = "Cadastro realizado com sucesso! 🎉";
+    alertPersonalizado("Cadastro realizado com sucesso! 🎉");
     setTimeout(() => {
       window.location.href = "FullCalendar/index.html"; // redireciona para o calendário
     }, 1500);
 
   } catch (error) {
-    console.error("Erro no cadastro:", error.message);
-    alert("Erro ao cadastrar: " + error.message);
+    alertPersonalizado("Erro no cadastro:", error.message);
   }
 });
 
+//alerta personalizado
+function alertPersonalizado(message) {
+  const msg = document.getElementById("simpleToastMsg");
+  msg.textContent = message;
+  const toast = new bootstrap.Toast(document.getElementById("simpleToast"));
+  toast.show();
+}

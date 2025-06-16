@@ -320,9 +320,6 @@ document.getElementById("cancelar").addEventListener('click', function(){
 document.getElementById("deleteEventBtn").addEventListener("click", async function () {
   if (!selectedEvent) return;
 
-  const confirmDelete = confirm("Tem certeza que deseja excluir este evento?");
-  if (!confirmDelete) return;
-
   // Verifica se o usuário está logado
   const user = auth.currentUser;
   if (!user) {

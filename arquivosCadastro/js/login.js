@@ -11,9 +11,21 @@ form.addEventListener("submit", async (event) => {
 
   try {
     await signInWithEmailAndPassword(auth, email, senha);
-    alert("Login realizado com sucesso!");
-    window.location.href = "FullCalendar/index.html";
+    alertPersonalizado("Login realizado com sucesso!");
+    
+    setTimeout(() => {
+        window.location.href = "FullCalendar/index.html";
+    }, 2000);
+  
   } catch (error) {
-    alert("Erro ao fazer login: " + error.message);
+    alertPersonalizado("Erro ao fazer login: " + error.message);
   }
 });
+
+//alerta personalizado
+function alertPersonalizado(message) {
+  const msg = document.getElementById("simpleToastMsg");
+  msg.textContent = message;
+  const toast = new bootstrap.Toast(document.getElementById("simpleToast"));
+  toast.show();
+}
