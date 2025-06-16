@@ -1,26 +1,76 @@
 const taskInput = document.getElementById('taskInput');
-const subtasksInput = document.getElementById('subtasksInput');
-const taskList = document.getElementById('taskList');
-const filterSelect = document.getElementById('filterSelect');
-const notification = document.getElementById('notification');
+const descInput = document.getElementById('descInput');
 const addBtn = document.getElementById('addBtn');
+const filterSelect = document.getElementById('filterSelect');
+const taskList = document.getElementById('taskList');
+const notification = document.getElementById('notification');
 
-let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
-let editIndex = null;
+let tasks = [];
 
-function showNotification(msg) {
-    notification.innerText = msg;
-    notification.classList.add('show');
-    setTimeout(() => {
-        notification.classList.remove('show');
-    }, 2000);
+addBtn.addEventListener('click', addTask);
+filterSelect.addEventListener('change', renderTasks);
+
+function addTask() {
+    const title = taskInput.value.trim();
+    const desc = descInput.value.trim();
+
+    if (title === '') {
+        showNotification('⚠️ Digite uma tarefa!');
+        return;
+    }
+
+    const task = {
+        id: Date.now(),
+        title,
+        desc,
+        completed: false,
+        favorite: false
+    };
+
+    tasks.push(task);
+    taskInput.value = '';
+    descInput.value = '';
+
+    renderTasks();
+    showNotification('✅ Tarefa adicionada!');
 }
 
-function saveTasks() {
-    localStorage.setItem('tasks', JSON.stringify(tasks));
+function toggleComplete(id) {
+    const task = tasks.find(t => t.id === id);
+    task.completed = !task.completed;
+    renderTasks();
 }
 
-function loadTasks() {
+function toggleFavorite(id) {
+    const task = tasks.find(t => t.id === id);
+    task.favorite = !task.favorite;
+    renderTasks();
+}
+
+function deleteTask(id) {
+    if (confirm('🗑️ Tem certeza que deseja excluir?')) {
+        tasks = tasks.filter(t => t.id !== id);
+        renderTasks();
+        showNotification('❌ Tarefa excluída!');
+    }
+}
+
+function editTask(id) {
+    const task = tasks.find(t => t.id === id);
+    const newTitle = prompt('✏️ Edite o título:', task.title);
+    if (newTitle !== null) {
+        task.title = newTitle.trim() === '' ? task.title : newTitle.trim();
+    }
+
+    const newDesc = prompt('📝 Edite a descrição:', task.desc);
+    if (newDesc !== null) {
+        task.desc = newDesc.trim();
+    }
+
+    renderTasks();
+}
+
+function renderTasks() {
     const filter = filterSelect.value;
     taskList.innerHTML = '';
 
@@ -31,119 +81,73 @@ function loadTasks() {
         return true;
     });
 
-    filteredTasks.forEach((task, index) => {
-        const li = document.createElement('li');
-        li.className = task.completed ? 'completed' : '';
-        
-        // checkbox
-        const checkbox = document.createElement('input');
-        checkbox.type = 'checkbox';
-        checkbox.checked = task.completed;
-        checkbox.className = 'checkbox';
-        checkbox.onclick = () => toggleCompleted(index);
-        li.appendChild(checkbox);
-
-        // title
-        const titleDiv = document.createElement('div');
-        titleDiv.className = 'title';
-        titleDiv.innerText = task.title;
-        li.appendChild(titleDiv);
-
-        // subtasks
-        if (task.subtasks.length > 0) {
-            const subtasksDiv = document.createElement('div');
-            subtasksDiv.className = 'subtasks';
-            subtasksDiv.innerText = 'Subtarefas: ' + task.subtasks.join(', ');
-            li.appendChild(subtasksDiv);
-        }
-
-        // buttons
-        const btnGroup = document.createElement('div');
-        btnGroup.className = 'btn-group';
-        btnGroup.innerHTML = `
-            <button onclick="editTask(${index})" title="Editar">✏️</button>
-            <button onclick="deleteTask(${index})" title="Excluir">🗑️</button>
-            <button onclick="toggleFavorite(${index})" title="Favoritar">${task.favorite ? '✨' : '⭐'}</button>
-        `;
-        li.appendChild(btnGroup);
-
-        taskList.appendChild(li);
-    });
-
-    checkAllCompleted();
-}
-
-function addTask() {
-    const title = taskInput.value.trim();
-    const subtasksText = subtasksInput.value.trim();
-    if (title === '') {
-        showNotification('⚠️ Digite uma tarefa!');
+    if (filteredTasks.length === 0) {
+        taskList.innerHTML = '<p>Nenhuma tarefa encontrada.</p>';
         return;
     }
 
-    const subtasks = subtasksText ? subtasksText.split(',').map(s => s.trim()).filter(s => s) : [];
+    filteredTasks.forEach(task => {
+        const taskDiv = document.createElement('div');
+        taskDiv.className = 'task';
+        if (task.completed) taskDiv.classList.add('completed');
 
-    if (editIndex !== null) {
-        // Atualizar tarefa existente
-        tasks[editIndex].title = title;
-        tasks[editIndex].subtasks = subtasks;
-        showNotification('💾 Tarefa atualizada!');
-        editIndex = null;
-        addBtn.innerText = '➕ Adicionar Tarefa';
-    } else {
-        // Adicionar nova tarefa
-        tasks.push({ title, completed: false, favorite: false, subtasks });
-        showNotification('✅ Tarefa adicionada!');
-    }
+        const leftDiv = document.createElement('div');
+        leftDiv.className = 'task-left';
 
-    saveTasks();
-    loadTasks();
-    taskInput.value = '';
-    subtasksInput.value = '';
+        const checkbox = document.createElement('input');
+        checkbox.type = 'checkbox';
+        checkbox.checked = task.completed;
+        checkbox.addEventListener('change', () => toggleComplete(task.id));
+
+        const title = document.createElement('div');
+        title.className = 'title';
+        title.textContent = task.title;
+
+        const desc = document.createElement('div');
+        desc.className = 'desc';
+        desc.textContent = task.desc;
+
+        leftDiv.appendChild(checkbox);
+        const textDiv = document.createElement('div');
+        textDiv.appendChild(title);
+        if (task.desc) textDiv.appendChild(desc);
+        leftDiv.appendChild(textDiv);
+
+        const btnDiv = document.createElement('div');
+        btnDiv.className = 'buttons';
+
+        const favBtn = document.createElement('button');
+        favBtn.innerHTML = task.favorite ? '⭐' : '☆';
+        favBtn.title = 'Favoritar';
+        favBtn.addEventListener('click', () => toggleFavorite(task.id));
+
+        const editBtn = document.createElement('button');
+        editBtn.innerHTML = '✏️';
+        editBtn.title = 'Editar';
+        editBtn.addEventListener('click', () => editTask(task.id));
+
+        const delBtn = document.createElement('button');
+        delBtn.innerHTML = '🗑️';
+        delBtn.title = 'Excluir';
+        delBtn.addEventListener('click', () => deleteTask(task.id));
+
+        btnDiv.appendChild(favBtn);
+        btnDiv.appendChild(editBtn);
+        btnDiv.appendChild(delBtn);
+
+        taskDiv.appendChild(leftDiv);
+        taskDiv.appendChild(btnDiv);
+
+        taskList.appendChild(taskDiv);
+    });
 }
 
-function toggleCompleted(index) {
-    tasks[index].completed = !tasks[index].completed;
-    saveTasks();
-    loadTasks();
+function showNotification(message) {
+    notification.textContent = message;
+    notification.classList.add('show');
+
+    setTimeout(() => {
+        notification.classList.remove('show');
+    }, 2000);
 }
-
-function editTask(index) {
-    const task = tasks[index];
-    taskInput.value = task.title;
-    subtasksInput.value = task.subtasks.join(', ');
-    addBtn.innerText = '💾 Salvar';
-    editIndex = index;
-    taskInput.focus();
-}
-
-function deleteTask(index) {
-    if (!confirm('🗑️ Tem certeza que deseja excluir?')) return;
-    tasks.splice(index, 1);
-    saveTasks();
-    loadTasks();
-    showNotification('🗑️ Tarefa excluída!');
-}
-
-function toggleFavorite(index) {
-    tasks[index].favorite = !tasks[index].favorite;
-    saveTasks();
-    loadTasks();
-    const msg = tasks[index].favorite ? '⭐ Marcada como favorita!' : '✨ Removida dos favoritos!';
-    showNotification(msg);
-}
-
-function checkAllCompleted() {
-    if (tasks.length > 0 && tasks.every(task => task.completed)) {
-        showNotification('🎉 Todas as tarefas concluídas!');
-    }
-}
-
-filterSelect.addEventListener('change', loadTasks);
-addBtn.addEventListener('click', addTask);
-
-loadTasks();
-
-
-
 
