@@ -279,3 +279,51 @@ body.temaNature .quill {
 body.temaNature .cores {
   background-color: #a5d6a7;
 }
+
+
+/*tema 6*/
+body.temaRoxo {
+  background: linear-gradient(135deg, #ee00ff, #0575e6);
+  color: #ffffff;
+}
+
+body.temaRoxo #container,
+body.temaRoxo #calendar {
+  background-color: rgba(255, 255, 255, 0.15);
+  color: #ffffff;
+}
+
+body.temaRoxo .navbar {
+  background: linear-gradient(90deg, #bf00cd, #0575e6) !important;
+}
+
+body.temaRoxo .modal-content {
+  background-color: rgba(0, 0, 0, 0.4);
+  color: #ffffff;
+}
+
+body.temaRoxo .form-control {
+  background-color: #ffffff;
+  color: #000000;
+  border: 1px solid #ffffff;
+}
+
+body.temaRoxo .btn-close {
+  filter: invert(1);
+}
+
+body.temaRoxo .fc-toolbar-title {
+  color: #ffffff;
+}
+
+body.temaRoxo .fc-daygrid-day:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+body.temaRoxo .quill {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+body.temaRoxo .cores {
+  background-color: rgba(255, 255, 255, 0.25);
+}

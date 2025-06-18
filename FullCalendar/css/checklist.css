@@ -1,0 +1,182 @@
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa&display=swap');
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #f0f8ff;
+    font-family: 'Comfortaa', cursive;
+    text-align: center;
+    padding: 20px;
+    margin: 0;
+    color: #123e7a;
+}
+
+h1 {
+    color: #2a4d9f;
+    margin-bottom: 20px;
+    font-weight: 700;
+    text-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.task-container {
+    background: #ffffffdd;
+    padding: 20px;
+    border-radius: 25px;
+    max-width: 520px;
+    margin: 0 auto 20px auto;
+    box-shadow: 0 8px 20px rgba(42, 77, 159, 0.15);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+}
+
+.task-container input {
+    flex: 1 1 100%;
+    padding: 12px;
+    border: 2px solid #aac8ff;
+    border-radius: 20px;
+    outline: none;
+    background: #f7faff;
+    color: #1b3a73;
+    font-size: 16px;
+}
+
+.task-container input:focus {
+    border-color: #557ddf;
+    background: #eaf3ff;
+}
+
+.task-container button {
+    padding: 10px 18px;
+    background-color: #557ddf;
+    color: white;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 16px;
+    transition: background-color 0.3s;
+}
+
+.task-container button:hover {
+    background-color: #3d5cb5;
+}
+
+.controls {
+    max-width: 520px;
+    margin: 0 auto 20px auto;
+}
+
+.controls select {
+    width: 100%;
+    padding: 12px;
+    border-radius: 25px;
+    border: 2px solid #aac8ff;
+    background: #f7faff;
+    color: #1b3a73;
+    font-size: 16px;
+}
+
+.task-list {
+    max-width: 520px;
+    margin: 0 auto;
+}
+
+.task {
+    background-color: #e9f0ff;
+    border-radius: 20px;
+    padding: 15px;
+    margin-bottom: 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 6px 14px rgba(42, 77, 159, 0.12);
+    flex-wrap: wrap;
+}
+
+.task.completed {
+    opacity: 0.7;
+    text-decoration: line-through;
+}
+
+.task-left {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex: 1 1 auto;
+    min-width: 200px;
+}
+
+.task .title {
+    font-weight: 700;
+    color: #3357c7;
+    font-size: 17px;
+}
+
+.task .desc {
+    color: #3a4f8a;
+    font-size: 14px;
+}
+
+.task input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+    accent-color: #557ddf;
+    cursor: pointer;
+}
+
+.buttons button {
+    background: none;
+    border: none;
+    color: #557ddf;
+    cursor: pointer;
+    padding: 6px 10px;
+    border-radius: 15px;
+    transition: background-color 0.3s;
+    font-weight: 600;
+}
+
+.buttons button:hover {
+    background-color: #dce6ff;
+}
+
+.notification {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #557ddf;
+    color: white;
+    padding: 10px 25px;
+    border-radius: 30px;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.4s ease;
+    font-size: 15px;
+    box-shadow: 0 6px 20px rgba(85, 125, 223, 0.5);
+}
+
+.notification.show {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+/* 🎯 Responsividade */
+@media (max-width: 600px) {
+    .task-container {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    .task {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+    }
+    .buttons {
+        width: 100%;
+        text-align: right;
+    }
+}
