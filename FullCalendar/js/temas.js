@@ -7,7 +7,6 @@ temasContainer.innerHTML = `
           <option value="temaDarkMode">Dark</option>
           <option value="temaFuturista">Futurista</option>
           <option value="temaSunset">Sunset</option>
-          <option value="temaPsicodelico">Psicodélico</option>
           <option value="temaGalaxy">Galaxy</option>
           <option value="temaNature">Nature</option>
           <option value="temaRoxo">Roxo</option>

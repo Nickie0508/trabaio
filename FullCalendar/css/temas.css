@@ -1,4 +1,19 @@
-/*temas de modo escuro*/
+.navbar{
+  background-color: rgb(0, 0, 79) !important; 
+}
+
+.nav-item a{
+  margin-top: 3px;
+  width: 95px;
+}
+
+.nav-item #selectTemas{
+  margin-top: 3px;
+  width: 100px;
+}
+
+
+/*tema de modo escuro*/
 body.temaDarkMode {
   background-color: #323232;
   color: #e0e0e0;
@@ -46,7 +61,7 @@ body.temaDarkMode .cores{
 }
 
 
-/*temas*/
+/*tema temaFuturista*/
 body.temaFuturista {
   background-color: #0f0f0f;
   color: #00ffff;
@@ -93,7 +108,7 @@ body.temaFuturista .cores {
   background-color: #00bcd4;
 }
 
-/*tema 2*/
+/*tema temaSunset*/
 body.temaSunset {
   background: linear-gradient(135deg, #ff7e5f, #feb47b);
   color: #ffffff;
@@ -140,54 +155,7 @@ body.temaSunset .cores {
   background-color: rgba(255, 255, 255, 0.25);
 }
 
-/*tema 3*/
-body.temaPsicodelico {
-  background: linear-gradient(135deg, #00f260, #0575e6);
-  color: #ffffff;
-}
-
-body.temaPsicodelico #container,
-body.temaPsicodelico #calendar {
-  background-color: rgba(255, 255, 255, 0.15);
-  color: #ffffff;
-}
-
-body.temaPsicodelico .navbar {
-  background: linear-gradient(90deg, #0575e6, #00f260) !important;
-}
-
-body.temaPsicodelico .modal-content {
-  background-color: rgba(0, 0, 0, 0.4);
-  color: #ffffff;
-}
-
-body.temaPsicodelico .form-control {
-  background-color: #ffffff;
-  color: #000000;
-  border: 1px solid #ffffff;
-}
-
-body.temaPsicodelico .btn-close {
-  filter: invert(1);
-}
-
-body.temaPsicodelico .fc-toolbar-title {
-  color: #ffffff;
-}
-
-body.temaPsicodelico .fc-daygrid-day:hover {
-  background-color: rgba(255, 255, 255, 0.1);
-}
-
-body.temaPsicodelico .quill {
-  background-color: rgba(255, 255, 255, 0.2);
-}
-
-body.temaPsicodelico .cores {
-  background-color: rgba(255, 255, 255, 0.25);
-}
-
-/*tema 4*/
+/*tema temaGalaxy*/
 body.temaGalaxy {
   background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
   color: #ffffff;
@@ -233,7 +201,7 @@ body.temaGalaxy .quill {
 body.temaGalaxy .cores {
   background-color: rgba(255, 255, 255, 0.2);
 }
- /*tema 5*/
+ /*tema temaNature*/
  body.temaNature {
   background-color: #2e7d32;
   color: #e0e0e0;
@@ -281,7 +249,7 @@ body.temaNature .cores {
 }
 
 
-/*tema 6*/
+/*tema temaRoxo*/
 body.temaRoxo {
   background: linear-gradient(135deg, #ee00ff, #0575e6);
   color: #ffffff;

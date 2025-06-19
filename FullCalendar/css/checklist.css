@@ -1,25 +1,19 @@
 @import url('https://fonts.googleapis.com/css2?family=Comfortaa&display=swap');
 
-* {
-    box-sizing: border-box;
-}
 
-body {
-    background-color: #f0f8ff;
-    font-family: 'Comfortaa', cursive;
-    text-align: center;
-    padding: 20px;
-    margin: 0;
-    color: #123e7a;
-}
 
+/* Título */
 h1 {
     color: #2a4d9f;
     margin-bottom: 20px;
     font-weight: 700;
     text-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    text-align: center;
+    font-family: 'Comfortaa', cursive;
+    margin-top: 50px;
 }
 
+/* Caixa de input de tarefas */
 .task-container {
     background: #ffffffdd;
     padding: 20px;
@@ -65,6 +59,7 @@ h1 {
     background-color: #3d5cb5;
 }
 
+/* Filtros */
 .controls {
     max-width: 520px;
     margin: 0 auto 20px auto;
@@ -80,11 +75,13 @@ h1 {
     font-size: 16px;
 }
 
+/* Lista de tarefas */
 .task-list {
     max-width: 520px;
     margin: 0 auto;
 }
 
+/* Card da tarefa */
 .task {
     background-color: #e9f0ff;
     border-radius: 20px;
@@ -102,6 +99,7 @@ h1 {
     text-decoration: line-through;
 }
 
+/* Esquerda do card */
 .task-left {
     display: flex;
     align-items: center;
@@ -128,6 +126,7 @@ h1 {
     cursor: pointer;
 }
 
+/* Botões de ação */
 .buttons button {
     background: none;
     border: none;
@@ -143,6 +142,7 @@ h1 {
     background-color: #dce6ff;
 }
 
+/* Notificação */
 .notification {
     position: fixed;
     bottom: 20px;
@@ -164,7 +164,7 @@ h1 {
     pointer-events: auto;
 }
 
-/* 🎯 Responsividade */
+/* Responsividade */
 @media (max-width: 600px) {
     .task-container {
         flex-direction: column;
