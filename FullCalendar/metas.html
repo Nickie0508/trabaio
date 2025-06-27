@@ -1,18 +1,26 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Metas</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>✨ Minhas Metas</title>
+  <link rel="stylesheet" href="metas.css" />
 </head>
 <body>
-    metas
-    (lista de metas com porcentagem de o quanto ja foi concluida)
+  <h1 class="titulo-centralizado">🌟 Minhas Metas</h1>
 
-    procentagem - ou o usuario escolhe o quanto foi concluido com uma barrinha 
+  <form id="formMeta" class="form-metass">
+    <input type="text" id="nomeMeta" placeholder="Nome da meta" required />
+    <input type="date" id="prazoMeta" required />
+    <input type="number" id="progressoManual" placeholder="% concluído (0 a 100) (opcional)" min="0" max="100" />
+    <label>
+      <input type="checkbox" id="prioridadeMeta" /> Prioridade ⭐
+    </label>
+    <button type="submit">Adicionar 🌱</button>
+  </form>
 
-    ou eles fazem um passo a passo (checklist) ate o final de sua meta e cada meta seja dividida em ate 100 pontos
-    ex-- 10 tarefas para uma meta! == 10 pontos para cada tarefa (100 / 10)
-         6 tarefas para uma meta! == 16 pontos para cada tarefa (100/6)
+  <div id="listaMetas"></div>
+
+  <script src="metas.js" defer></script>
 </body>
 </html>
