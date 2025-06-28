@@ -4,9 +4,174 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>✨ Minhas Metas</title>
-  <link rel="stylesheet" href="metas.css" />
+  <style>
+    body {
+      background-color: #f1f6fb;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      padding: 2rem;
+    }
+
+    .titulo-centralizado {
+      text-align: center;
+      margin-bottom: 2rem;
+      font-weight: 700;
+      color: #333;
+    }
+
+    .form-metass {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 2rem;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .form-metass input[type="text"],
+    .form-metass input[type="date"],
+    .form-metass input[type="number"] {
+      padding: 0.5rem;
+      border-radius: 10px;
+      border: 1px solid #ccc;
+      font-size: 1rem;
+      min-width: 180px;
+    }
+
+    .form-metass label {
+      font-weight: 600;
+      color: #444;
+      cursor: pointer;
+      user-select: none;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .form-metass button {
+      background-color: #5ca7e8;
+      border: none;
+      color: white;
+      font-weight: bold;
+      padding: 0 1.5rem;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .form-metass button:hover {
+      background-color: #4a93d5;
+    }
+
+    .meta-card {
+      border-radius: 20px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      background-color: #fff;
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+      transition: box-shadow 0.3s ease, border-color 0.3s ease;
+    }
+
+    .meta-card.prioridade {
+      border: 2.5px solid #ffbf00;
+      box-shadow: 0 0 10px #ffbf0055;
+    }
+
+    .meta-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+
+    .progress {
+      height: 24px;
+      border-radius: 12px;
+      background-color: #e0f0fd;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .progress-bar {
+      background-color: #5ca7e8;
+      font-weight: 700;
+      color: #fff;
+      line-height: 24px;
+      border-radius: 12px 0 0 12px;
+      text-align: center;
+      transition: width 0.6s ease;
+      white-space: nowrap;
+      padding: 0 10px;
+      user-select: none;
+    }
+
+    .subtarefas-lista {
+      margin-top: 1rem;
+      padding-left: 1.5rem;
+    }
+
+    .subtarefa-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 0.4rem;
+      cursor: pointer;
+    }
+
+    .acoes {
+      margin-top: 1rem;
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .acoes button {
+      cursor: pointer;
+      border-radius: 8px;
+      border: none;
+      padding: 0.4rem 0.8rem;
+      background-color: #5ca7e8;
+      color: white;
+      font-weight: 600;
+      transition: background-color 0.3s ease;
+    }
+
+    .acoes button:hover {
+      background-color: #4a93d5;
+    }
+
+    .acoes label {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      cursor: pointer;
+      font-weight: 600;
+      color: #444;
+    }
+
+    .botao-voltar {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background-color: #5ca7e8;
+      color: white;
+      padding: 0.6rem 1.2rem;
+      border-radius: 12px;
+      font-weight: bold;
+      text-decoration: none;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      transition: background-color 0.3s ease;
+    }
+
+    .botao-voltar:hover {
+      background-color: #4a93d5;
+    }
+  </style>
 </head>
 <body>
+
+  <a href="index.html" class="botao-voltar">← Voltar</a>
+
   <h1 class="titulo-centralizado">🌟 Minhas Metas</h1>
 
   <form id="formMeta" class="form-metass">
@@ -24,3 +189,4 @@
   <script src="metas.js" defer></script>
 </body>
 </html>
+
