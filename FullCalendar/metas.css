@@ -1,143 +1,212 @@
-body {
-  background-color: #f1f6fb;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  padding: 2rem;
-}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Minhas Metas</title>
+  <style>
+    body {
+      background-color: #f1f6fb;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      padding: 2rem;
+    }
 
-.titulo-centralizado {
-  text-align: center;
-  margin-bottom: 2rem;
-  font-weight: 700;
-  color: #333;
-}
+    .titulo-centralizado {
+      text-align: center;
+      margin-bottom: 2rem;
+      font-weight: 700;
+      color: #333;
+    }
 
-.form-metass {
-  display: flex;
-  gap: 10px;
-  margin-bottom: 2rem;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
-}
+    .form-metass {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 2rem;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+    }
 
-.form-metass input[type="text"],
-.form-metass input[type="date"],
-.form-metass input[type="number"] {
-  padding: 0.5rem;
-  border-radius: 10px;
-  border: 1px solid #ccc;
-  font-size: 1rem;
-  min-width: 180px;
-}
+    .form-metass input[type="text"],
+    .form-metass input[type="date"],
+    .form-metass input[type="number"] {
+      padding: 0.5rem;
+      border-radius: 10px;
+      border: 1px solid #ccc;
+      font-size: 1rem;
+      min-width: 180px;
+    }
 
-.form-metass label {
-  font-weight: 600;
-  color: #444;
-  cursor: pointer;
-  user-select: none;
-  display: flex;
-  align-items: center;
-  gap: 4px;
-}
+    .form-metass label {
+      font-weight: 600;
+      color: #444;
+      cursor: pointer;
+      user-select: none;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
 
-.form-metass button {
-  background-color: #5ca7e8;
-  border: none;
-  color: white;
-  font-weight: bold;
-  padding: 0 1.5rem;
-  border-radius: 12px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
+    .form-metass button {
+      background-color: #5ca7e8;
+      border: none;
+      color: white;
+      font-weight: bold;
+      padding: 0 1.5rem;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
 
-.form-metass button:hover {
-  background-color: #4a93d5;
-}
+    .form-metass button:hover {
+      background-color: #4a93d5;
+    }
 
-.meta-card {
-  border-radius: 20px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  background-color: #fff;
-  padding: 1.5rem;
-  margin-bottom: 1.5rem;
-  transition: box-shadow 0.3s ease, border-color 0.3s ease;
-}
+    .meta-card {
+      border-radius: 20px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      background-color: #fff;
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+      transition: box-shadow 0.3s ease, border-color 0.3s ease;
+    }
 
-.meta-card.prioridade {
-  border: 2.5px solid #ffbf00;
-  box-shadow: 0 0 10px #ffbf0055;
-}
+    .meta-card.prioridade {
+      border: 2.5px solid #ffbf00;
+      box-shadow: 0 0 10px #ffbf0055;
+    }
 
-.meta-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  font-weight: 600;
-  margin-bottom: 0.5rem;
-}
+    .meta-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
 
-.progress {
-  height: 24px;
-  border-radius: 12px;
-  background-color: #e0f0fd;
-  overflow: hidden;
-  position: relative;
-}
+    .progress {
+      height: 24px;
+      border-radius: 12px;
+      background-color: #e0f0fd;
+      overflow: hidden;
+      position: relative;
+    }
 
-.progress-bar {
-  background-color: #5ca7e8;
-  font-weight: 700;
-  color: #fff;
-  line-height: 24px;
-  border-radius: 12px 0 0 12px;
-  text-align: center;
-  transition: width 0.6s ease;
-  white-space: nowrap;
-  padding: 0 10px;
-  user-select: none;
-}
+    .progress-bar {
+      background-color: #5ca7e8;
+      font-weight: 700;
+      color: #fff;
+      line-height: 24px;
+      border-radius: 12px 0 0 12px;
+      text-align: center;
+      transition: width 0.6s ease;
+      white-space: nowrap;
+      padding: 0 10px;
+      user-select: none;
+    }
 
-.subtarefas-lista {
-  margin-top: 1rem;
-  padding-left: 1.5rem;
-}
+    .subtarefas-lista {
+      margin-top: 1rem;
+      padding-left: 1.5rem;
+    }
 
-.subtarefa-item {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  margin-bottom: 0.4rem;
-  cursor: pointer;
-}
+    .subtarefa-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 0.4rem;
+      cursor: pointer;
+    }
 
-.acoes {
-  margin-top: 1rem;
-  display: flex;
-  gap: 10px;
-  flex-wrap: wrap;
-}
+    .acoes {
+      margin-top: 1rem;
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
 
-.acoes button {
-  cursor: pointer;
-  border-radius: 8px;
-  border: none;
-  padding: 0.4rem 0.8rem;
-  background-color: #5ca7e8;
-  color: white;
-  font-weight: 600;
-  transition: background-color 0.3s ease;
-}
+    .acoes button {
+      cursor: pointer;
+      border-radius: 8px;
+      border: none;
+      padding: 0.4rem 0.8rem;
+      background-color: #5ca7e8;
+      color: white;
+      font-weight: 600;
+      transition: background-color 0.3s ease;
+    }
 
-.acoes button:hover {
-  background-color: #4a93d5;
-}
+    .acoes button:hover {
+      background-color: #4a93d5;
+    }
 
-.acoes label {
-  display: flex;
-  align-items: center;
-  gap: 4px;
-  cursor: pointer;
-  font-weight: 600;
-  color: #444;
-}
+    .acoes label {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      cursor: pointer;
+      font-weight: 600;
+      color: #444;
+    }
+
+    /* 🔵 Botão Voltar */
+    .voltar-btn {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background-color: #00c3ff;
+      color: white;
+      border: none;
+      padding: 8px 20px;
+      border-radius: 20px;
+      font-weight: bold;
+      cursor: pointer;
+      box-shadow: 0 4px 8px rgba(0, 195, 255, 0.4);
+      transition: background-color 0.3s ease;
+      z-index: 1000;
+    }
+
+    .voltar-btn:hover {
+      background-color: #00a8e0;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- 🔙 Botão Voltar -->
+  <button class="voltar-btn" onclick="window.location.href='index.html'">← Voltar</button>
+
+  <h1 class="titulo-centralizado">Minhas Metas</h1>
+
+  <!-- Aqui vai o restante do seu conteúdo normalmente -->
+  <div class="form-metass">
+    <!-- Formulário de exemplo -->
+    <input type="text" placeholder="Nome da meta">
+    <input type="date">
+    <input type="number" placeholder="Progresso %">
+    <button>Adicionar Meta</button>
+  </div>
+
+  <div class="meta-card">
+    <div class="meta-header">
+      <span>Estudar HTML</span>
+      <span>🔥</span>
+    </div>
+    <div class="progress">
+      <div class="progress-bar" style="width: 60%;">60%</div>
+    </div>
+    <div class="subtarefas-lista">
+      <div class="subtarefa-item">✔️ Ver vídeos</div>
+      <div class="subtarefa-item">✔️ Fazer exercícios</div>
+    </div>
+    <div class="acoes">
+      <button>Editar</button>
+      <button>Excluir</button>
+      <label><input type="checkbox"> Prioridade</label>
+    </div>
+  </div>
+
+</body>
+</html>
+
