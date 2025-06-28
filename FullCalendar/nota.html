@@ -13,15 +13,27 @@
     <link rel="icon" href="img/planner_icon.png" type="image/png">
 
     <style>
+        body {
+            padding: 80px 20px 20px 20px;
+            background-color: #f1f6fb;
+            font-family: Arial, sans-serif;
+        }
+
+        h1 {
+            text-align: center;
+            color: #3b5bdb;
+            margin-bottom: 20px;
+        }
+
+        /* ===== Botão Voltar ===== */
         .back-button {
             position: absolute;
             top: 20px;
             right: 20px;
-            left: auto;
-            background-color: #00AEEF; /* Azul */
+            background-color: #00AEEF;
             color: white;
             border: none;
-            padding: 10px 15px;
+            padding: 10px 20px;
             border-radius: 50px;
             display: flex;
             align-items: center;
@@ -29,6 +41,7 @@
             font-weight: bold;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
             transition: background-color 0.3s, transform 0.2s;
+            z-index: 999;
         }
 
         .back-button:hover {
@@ -40,11 +53,113 @@
             margin-right: 8px;
             font-size: 18px;
         }
+
+        .note-container {
+            max-width: 600px;
+            margin: 0 auto 20px;
+            background-color: white;
+            padding: 20px;
+            border-radius: 16px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .note-container input,
+        .note-container textarea {
+            width: 100%;
+            padding: 10px;
+            border-radius: 12px;
+            border: 1px solid #ced4da;
+        }
+
+        .note-container textarea {
+            height: 150px;
+            resize: none;
+        }
+
+        .note-container button {
+            border: none;
+            border-radius: 30px;
+            padding: 8px 16px;
+            background-color: #5c7cfa;
+            color: white;
+            box-shadow: 0 4px 8px rgba(92, 124, 250, 0.3);
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .note-container button:hover {
+            background-color: #3b5bdb;
+        }
+
+        .controls {
+            max-width: 600px;
+            margin: 0 auto 20px;
+            display: flex;
+            gap: 10px;
+        }
+
+        .controls input, .controls select {
+            flex: 1;
+            padding: 8px;
+            border-radius: 12px;
+            border: 1px solid #ced4da;
+        }
+
+        ul#noteList {
+            max-width: 600px;
+            margin: 0 auto;
+            list-style: none;
+            padding: 0;
+        }
+
+        .notification {
+            text-align: center;
+            margin-top: 10px;
+            color: green;
+        }
+
+        /* ===== MOBILE RESPONSIVO ===== */
+        @media (max-width: 600px) {
+            body {
+                padding: 70px 10px 10px 10px;
+            }
+
+            h1 {
+                font-size: 24px;
+            }
+
+            .back-button {
+                top: 15px;
+                right: 15px;
+                padding: 8px 16px;
+                font-size: 14px;
+            }
+
+            .note-container {
+                padding: 15px;
+            }
+
+            .controls {
+                flex-direction: column;
+            }
+
+            .controls input, .controls select {
+                width: 100%;
+            }
+
+            .note-container button {
+                width: 100%;
+                padding: 10px;
+            }
+        }
     </style>
 </head>
 <body>
 
-    <!-- Botão de Voltar no canto direito -->
+    <!-- Botão de Voltar -->
     <a href="index.html" class="back-button">
         <i class="bi bi-arrow-left"></i> Voltar
     </a>
@@ -77,4 +192,4 @@
     <script src="js/temas.js"></script>
 </body>
 </html>
-
+        
