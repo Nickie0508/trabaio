@@ -9,16 +9,18 @@
     <link rel="icon" href="img/planner_icon.png" type="image/png">
     <style>
         body {
-            background-color: #dce9f9; /* Fundo azul claro */
+            background-color: #dce9f9;
             font-family: Arial, sans-serif;
-            padding: 20px;
+            padding: 80px 20px 20px 20px; /* Aumentei o padding-top para afastar do topo */
             position: relative;
         }
+
         h1 {
             text-align: center;
             margin-bottom: 20px;
             color: #3b5bdb;
         }
+
         .task-container {
             max-width: 500px;
             margin: 0 auto 20px;
@@ -27,6 +29,7 @@
             border-radius: 16px;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
         }
+
         .task-container input {
             width: 100%;
             padding: 10px;
@@ -34,6 +37,7 @@
             border: 1px solid #ced4da;
             margin-bottom: 10px;
         }
+
         .task-container button {
             border: none;
             border-radius: 30px;
@@ -44,28 +48,34 @@
             cursor: pointer;
             transition: background-color 0.3s ease;
         }
+
         .task-container button:hover {
             background-color: #3b5bdb;
         }
+
         .button-group {
             display: flex;
             gap: 30px;
             justify-content: center;
         }
+
         .controls {
             max-width: 500px;
             margin: 0 auto 20px;
         }
+
         .controls select {
             width: 100%;
             padding: 8px;
             border-radius: 12px;
             border: 1px solid #ced4da;
         }
+
         .task-list {
             max-width: 500px;
             margin: 0 auto;
         }
+
         .task-item {
             background-color: #f8f9fa;
             border-radius: 12px;
@@ -75,10 +85,12 @@
             justify-content: space-between;
             align-items: center;
         }
+
         .task-item.completed {
             text-decoration: line-through;
             opacity: 0.6;
         }
+
         .task-actions button {
             background: none;
             border: none;
@@ -86,26 +98,84 @@
             margin-left: 5px;
             font-size: 18px;
         }
+
         .task-actions button:hover {
             color: #3b5bdb;
         }
-        /* Botão Voltar */
+
+        /* ===== Botão Voltar ===== */
         .back-button {
             position: absolute;
             top: 20px;
-            right: 20px;
+            right: 25px;
             background-color: #00bfff;
             border: none;
             border-radius: 30px;
             color: white;
-            padding: 8px 16px;
+            padding: 10px 20px;
             font-weight: bold;
             cursor: pointer;
             box-shadow: 0 4px 8px rgba(0, 191, 255, 0.3);
             transition: background-color 0.3s ease;
+            z-index: 999;
         }
+
         .back-button:hover {
             background-color: #009acd;
+        }
+
+        /* ===== MOBILE ===== */
+        @media (max-width: 600px) {
+            body {
+                padding: 70px 10px 10px 10px; /* Menor no mobile, mas ainda com espaço */
+            }
+
+            .task-container, .controls, .task-list {
+                width: 100%;
+                max-width: 100%;
+                padding: 15px;
+            }
+
+            .button-group {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .back-button {
+                top: 15px;
+                right: 15px;
+                padding: 8px 18px;
+                font-size: 14px;
+            }
+
+            h1 {
+                font-size: 24px;
+            }
+
+            .task-container input {
+                padding: 8px;
+            }
+
+            .task-container button {
+                padding: 10px;
+                width: 100%;
+            }
+
+            .controls select {
+                padding: 8px;
+            }
+
+            .task-item {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 8px;
+            }
+
+            .task-actions {
+                width: 100%;
+                display: flex;
+                justify-content: flex-end;
+            }
         }
     </style>
 </head>
@@ -227,4 +297,4 @@
         loadTasks();
     </script>
 </body>
-</html>
+</html>        
