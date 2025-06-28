@@ -3,134 +3,178 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Controle Financeiro</title>
-  <link rel="icon" href="img/planner_icon.png" type="image/png" />
+  <title>Finanças</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet" />
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet" />
+  <link rel="stylesheet" href="css/temas.css" />
+  <link rel="icon" href="img/planner_icon.png" type="image/png" />
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    body { background-color: #f1f6fb; }
+    .navbar-dark.bg-dark { background-color: #000b5e !important; }
+    .form-control, .btn { border-radius: 10px; }
+    .card { border-radius: 15px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
+    .progress-bar { background-color: #0056b3; }
+  </style>
 </head>
-<body class="bg-light">
+<body>
 
 <!-- Navbar -->
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
   <div class="container-fluid">
     <a class="navbar-brand" href="index.html">Meu Calendário</a>
-    <div class="collapse navbar-collapse" id="navbarConteudo">
-      <ul class="navbar-nav me-auto">
+    <div class="collapse navbar-collapse">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item"><a class="btn btn-outline-light me-1" href="nota.html">Notas</a></li>
         <li class="nav-item"><a class="btn btn-outline-light me-1" href="checklist.html">Checklist</a></li>
-        <li class="nav-item"><a class="btn btn-outline-light me-1 active" href="Financas.html">Finanças</a></li>
+        <li class="nav-item"><a class="btn btn-outline-light me-1" href="Financas.html">Finanças</a></li>
         <li class="nav-item"><a class="btn btn-outline-light me-1" href="metas.html">Metas</a></li>
       </ul>
-      <button class="btn btn-danger"><i class="bi bi-box-arrow-left"></i></button>
+      <button id="sair" class="btn btn-danger"><i class="bi bi-box-arrow-left"></i></button>
     </div>
   </div>
 </nav>
 
-<div class="container mt-4">
+<div class="container mt-4 mb-5">
+  <h2 class="mb-4">📊 Controle Financeiro</h2>
 
-  <h2 class="mb-4 text-center">💰 Controle Financeiro</h2>
+  <!-- Limite Mensal -->
+  <div class="mb-4">
+    <label class="form-label">Limite de gasto mensal (R$):</label>
+    <div class="input-group">
+      <input type="number" id="limiteGasto" class="form-control" placeholder="Ex: 1500" />
+      <button class="btn btn-primary" onclick="salvarLimite()">Salvar limite</button>
+    </div>
+  </div>
 
-  <!-- Cards Resumo -->
-  <div class="row text-center mb-4">
-    <div class="col-md-4">
-      <div class="card border-primary">
-        <div class="card-body">
-          <h6>Total Gasto</h6>
-          <h4 class="text-danger" id="totalGasto">R$ 0,00</h4>
-        </div>
-      </div>
+  <!-- Progresso de Gastos -->
+  <div class="mb-4">
+    <label class="form-label">Progresso de gastos:</label>
+    <div class="progress">
+      <div id="barraProgresso" class="progress-bar" role="progressbar" style="width: 0%;">0%</div>
     </div>
-    <div class="col-md-4">
-      <div class="card border-success">
-        <div class="card-body">
-          <h6>Limite Mensal</h6>
-          <h4 class="text-success" id="limiteMensal">R$ 1500,00</h4>
-        </div>
+  </div>
+
+  <!-- Formulário de Nova Transação -->
+  <div class="card p-3 mb-4">
+    <h5>Adicionar Nova Transação</h5>
+    <div class="row g-2">
+      <div class="col-md-4">
+        <input type="text" id="desc" class="form-control" placeholder="Descrição" />
       </div>
-    </div>
-    <div class="col-md-4">
-      <div class="card border-info">
-        <div class="card-body">
-          <h6>Saldo Restante</h6>
-          <h4 class="text-info" id="saldoRestante">R$ 1500,00</h4>
-        </div>
+      <div class="col-md-3">
+        <input type="number" id="valor" class="form-control" placeholder="Valor (R$)" />
+      </div>
+      <div class="col-md-3">
+        <select id="categoria" class="form-control">
+          <option value="Alimentação">Alimentação</option>
+          <option value="Transporte">Transporte</option>
+          <option value="Lazer">Lazer</option>
+          <option value="Outros">Outros</option>
+        </select>
+      </div>
+      <div class="col-md-2">
+        <button class="btn btn-success w-100" onclick="adicionarTransacao()">Adicionar</button>
       </div>
     </div>
   </div>
 
-  <!-- Botão adicionar transação -->
-  <div class="d-flex justify-content-end mb-2">
-    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalTransacao">
-      <i class="bi bi-plus-lg"></i> Adicionar Transação
-    </button>
-  </div>
-
-  <!-- Gráfico -->
+  <!-- Lista de Gastos -->
   <div class="card mb-4">
-    <div class="card-body">
-      <h5 class="card-title">Distribuição por Categoria</h5>
-      <canvas id="graficoGastos"></canvas>
+    <div class="card-header"><strong>Gastos Registrados</strong></div>
+    <ul id="listaTransacoes" class="list-group list-group-flush"></ul>
+    <div class="card-footer text-end fw-bold">
+      Total: R$ <span id="totalGastos">0.00</span>
     </div>
   </div>
 
-  <!-- Tabela de Transações -->
-  <div class="card mb-5">
-    <div class="card-body">
-      <h5 class="card-title">📋 Lista de Gastos</h5>
-      <div class="table-responsive">
-        <table class="table table-bordered">
-          <thead class="table-light">
-            <tr>
-              <th>Data</th>
-              <th>Descrição</th>
-              <th>Categoria</th>
-              <th>Valor (R$)</th>
-            </tr>
-          </thead>
-          <tbody id="listaTransacoes">
-            <tr><td colspan="4" class="text-center text-muted">Nenhuma transação registrada.</td></tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-  </div>
-
-</div>
-
-<!-- Modal Transação -->
-<div class="modal fade" id="modalTransacao" tabindex="-1">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <form id="formTransacao">
-        <div class="modal-header">
-          <h5 class="modal-title">Nova Transação</h5>
-          <button class="btn-close" data-bs-dismiss="modal"></button>
-        </div>
-        <div class="modal-body">
-          <input type="date" class="form-control mb-2" id="data" required>
-          <input type="text" class="form-control mb-2" id="descricao" placeholder="Descrição" required>
-          <input type="number" class="form-control mb-2" id="valor" placeholder="Valor (R$)" required>
-          <select class="form-select" id="categoria" required>
-            <option value="" disabled selected>Escolha a categoria</option>
-            <option>Alimentação</option>
-            <option>Transporte</option>
-            <option>Lazer</option>
-            <option>Educação</option>
-            <option>Outros</option>
-          </select>
-        </div>
-        <div class="modal-footer">
-          <button class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-          <button class="btn btn-primary" type="submit">Salvar</button>
-        </div>
-      </form>
-    </div>
+  <!-- Gráfico de Gastos -->
+  <div class="card p-3">
+    <h5>Distribuição por Categoria</h5>
+    <canvas id="graficoGastos"></canvas>
   </div>
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"></script>
-<script src="js/financas.js"></script>
+<script>
+  let limiteMensal = 0;
+  let transacoes = [];
+
+  function salvarLimite() {
+    const valor = parseFloat(document.getElementById('limiteGasto').value);
+    if (!isNaN(valor) && valor > 0) {
+      limiteMensal = valor;
+      atualizarBarraProgresso();
+    }
+  }
+
+  function adicionarTransacao() {
+    const desc = document.getElementById('desc').value;
+    const valor = parseFloat(document.getElementById('valor').value);
+    const categoria = document.getElementById('categoria').value;
+
+    if (desc && !isNaN(valor) && valor > 0) {
+      transacoes.push({ desc, valor, categoria });
+      document.getElementById('desc').value = '';
+      document.getElementById('valor').value = '';
+      atualizarLista();
+      atualizarBarraProgresso();
+      atualizarGrafico();
+    }
+  }
+
+  function atualizarLista() {
+    const lista = document.getElementById('listaTransacoes');
+    lista.innerHTML = '';
+    let total = 0;
+    transacoes.forEach((t, i) => {
+      total += t.valor;
+      const item = document.createElement('li');
+      item.className = 'list-group-item d-flex justify-content-between align-items-center';
+      item.innerHTML = `
+        <span>${t.desc} (${t.categoria})</span>
+        <span>R$ ${t.valor.toFixed(2)}</span>
+      `;
+      lista.appendChild(item);
+    });
+    document.getElementById('totalGastos').textContent = total.toFixed(2);
+  }
+
+  function atualizarBarraProgresso() {
+    const total = transacoes.reduce((s, t) => s + t.valor, 0);
+    const porcentagem = limiteMensal ? Math.min((total / limiteMensal) * 100, 100) : 0;
+    const barra = document.getElementById('barraProgresso');
+    barra.style.width = `${porcentagem}%`;
+    barra.textContent = `${Math.round(porcentagem)}%`;
+    barra.setAttribute('aria-valuenow', porcentagem);
+  }
+
+  let grafico;
+  function atualizarGrafico() {
+    const categorias = {};
+    transacoes.forEach(t => {
+      categorias[t.categoria] = (categorias[t.categoria] || 0) + t.valor;
+    });
+
+    const labels = Object.keys(categorias);
+    const data = Object.values(categorias);
+
+    if (grafico) grafico.destroy();
+
+    const ctx = document.getElementById('graficoGastos').getContext('2d');
+    grafico = new Chart(ctx, {
+      type: 'pie',
+      data: {
+        labels: labels,
+        datasets: [{
+          label: 'Gastos por Categoria',
+          data: data,
+          backgroundColor: ['#007bff', '#28a745', '#ffc107', '#dc3545'],
+        }]
+      }
+    });
+  }
+</script>
+
 </body>
 </html>
 
