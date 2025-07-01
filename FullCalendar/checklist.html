@@ -1,300 +1,37 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Checklist</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css" rel="stylesheet">
-    <link rel="icon" href="img/planner_icon.png" type="image/png">
-    <style>
-        body {
-            background-color: #dce9f9;
-            font-family: Arial, sans-serif;
-            padding: 80px 20px 20px 20px; /* Aumentei o padding-top para afastar do topo */
-            position: relative;
-        }
-
-        h1 {
-            text-align: center;
-            margin-bottom: 20px;
-            color: #3b5bdb;
-        }
-
-        .task-container {
-            max-width: 500px;
-            margin: 0 auto 20px;
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 16px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-        }
-
-        .task-container input {
-            width: 100%;
-            padding: 10px;
-            border-radius: 12px;
-            border: 1px solid #ced4da;
-            margin-bottom: 10px;
-        }
-
-        .task-container button {
-            border: none;
-            border-radius: 30px;
-            padding: 8px 16px;
-            background-color: #5c7cfa;
-            color: white;
-            box-shadow: 0 4px 8px rgba(92, 124, 250, 0.3);
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
-
-        .task-container button:hover {
-            background-color: #3b5bdb;
-        }
-
-        .button-group {
-            display: flex;
-            gap: 30px;
-            justify-content: center;
-        }
-
-        .controls {
-            max-width: 500px;
-            margin: 0 auto 20px;
-        }
-
-        .controls select {
-            width: 100%;
-            padding: 8px;
-            border-radius: 12px;
-            border: 1px solid #ced4da;
-        }
-
-        .task-list {
-            max-width: 500px;
-            margin: 0 auto;
-        }
-
-        .task-item {
-            background-color: #f8f9fa;
-            border-radius: 12px;
-            padding: 10px;
-            margin-bottom: 10px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .task-item.completed {
-            text-decoration: line-through;
-            opacity: 0.6;
-        }
-
-        .task-actions button {
-            background: none;
-            border: none;
-            cursor: pointer;
-            margin-left: 5px;
-            font-size: 18px;
-        }
-
-        .task-actions button:hover {
-            color: #3b5bdb;
-        }
-
-        /* ===== Botão Voltar ===== */
-        .back-button {
-            position: absolute;
-            top: 20px;
-            right: 25px;
-            background-color: #00bfff;
-            border: none;
-            border-radius: 30px;
-            color: white;
-            padding: 10px 20px;
-            font-weight: bold;
-            cursor: pointer;
-            box-shadow: 0 4px 8px rgba(0, 191, 255, 0.3);
-            transition: background-color 0.3s ease;
-            z-index: 999;
-        }
-
-        .back-button:hover {
-            background-color: #009acd;
-        }
-
-        /* ===== MOBILE ===== */
-        @media (max-width: 600px) {
-            body {
-                padding: 70px 10px 10px 10px; /* Menor no mobile, mas ainda com espaço */
-            }
-
-            .task-container, .controls, .task-list {
-                width: 100%;
-                max-width: 100%;
-                padding: 15px;
-            }
-
-            .button-group {
-                flex-direction: column;
-                gap: 10px;
-            }
-
-            .back-button {
-                top: 15px;
-                right: 15px;
-                padding: 8px 18px;
-                font-size: 14px;
-            }
-
-            h1 {
-                font-size: 24px;
-            }
-
-            .task-container input {
-                padding: 8px;
-            }
-
-            .task-container button {
-                padding: 10px;
-                width: 100%;
-            }
-
-            .controls select {
-                padding: 8px;
-            }
-
-            .task-item {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 8px;
-            }
-
-            .task-actions {
-                width: 100%;
-                display: flex;
-                justify-content: flex-end;
-            }
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Checklist</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css" rel="stylesheet">
+  <link rel="stylesheet" href="checklist.css">
 </head>
-
 <body>
-    <button class="back-button" onclick="window.location.href='index.html'">← Voltar</button>
+  <h1>✅ Meu Checklist</h1>
 
-    <h1>✅ Meu Checklist</h1>
+  <div class="task-container">
+    <input type="text" id="taskInput" placeholder="Digite uma tarefa...">
+    <input type="text" id="descInput" placeholder="Descrição (opcional)...">
+    <button id="addTaskBtn">➕ Adicionar</button>
+    <button id="saveListBtn" class="save-btn">💾 Salvar Lista</button>
+  </div>
 
-    <div class="task-container">
-        <input type="text" id="taskInput" placeholder="Digite uma tarefa..."/>
-        <input type="text" id="descInput" placeholder="Descrição (opcional)"/>
-        <div class="button-group">
-            <button id="addBtn">➕ Adicionar Tarefa</button>
-            <button id="saveBtn">💾 Salvar Lista</button>
-        </div>
-    </div>
+  <div class="controls">
+    <select id="filterSelect">
+      <option value="all">Todas</option>
+      <option value="completed">Concluídas</option>
+      <option value="pending">Pendentes</option>
+      <option value="favorites">Favoritas</option>
+    </select>
+  </div>
 
-    <div class="controls">
-        <select id="filterSelect">
-            <option value="all">Todas</option>
-            <option value="completed">Concluídas</option>
-            <option value="pending">Pendentes</option>
-            <option value="favorites">Favoritas</option>
-        </select>
-    </div>
+  <div id="taskList" class="task-list"></div>
+  <div id="notification" class="notification"></div>
 
-    <div id="taskList" class="task-list"></div>
+  <button id="backBtn" title="Voltar para página interior">⬅️ Voltar</button>
 
-    <script>
-        const taskInput = document.getElementById('taskInput');
-        const descInput = document.getElementById('descInput');
-        const addBtn = document.getElementById('addBtn');
-        const saveBtn = document.getElementById('saveBtn');
-        const taskList = document.getElementById('taskList');
-        const filterSelect = document.getElementById('filterSelect');
-
-        let tasks = [];
-
-        function renderTasks() {
-            taskList.innerHTML = '';
-
-            const filter = filterSelect.value;
-            let filteredTasks = tasks;
-
-            if (filter === 'completed') {
-                filteredTasks = tasks.filter(task => task.completed);
-            } else if (filter === 'pending') {
-                filteredTasks = tasks.filter(task => !task.completed);
-            } else if (filter === 'favorites') {
-                filteredTasks = tasks.filter(task => task.favorite);
-            }
-
-            filteredTasks.forEach((task, index) => {
-                const taskItem = document.createElement('div');
-                taskItem.className = 'task-item' + (task.completed ? ' completed' : '');
-                taskItem.innerHTML = `
-                    <div>
-                        <strong>${task.name}</strong><br/>
-                        <small>${task.description || ''}</small>
-                    </div>
-                    <div class="task-actions">
-                        <button onclick="toggleComplete(${index})"><i class="bi bi-check-circle${task.completed ? '-fill' : ''}"></i></button>
-                        <button onclick="toggleFavorite(${index})"><i class="bi bi-star${task.favorite ? '-fill' : ''}"></i></button>
-                        <button onclick="deleteTask(${index})"><i class="bi bi-trash"></i></button>
-                    </div>
-                `;
-                taskList.appendChild(taskItem);
-            });
-        }
-
-        function addTask() {
-            const name = taskInput.value.trim();
-            const description = descInput.value.trim();
-            if (name === '') {
-                alert('Digite uma tarefa!');
-                return;
-            }
-            tasks.push({ name, description, completed: false, favorite: false });
-            taskInput.value = '';
-            descInput.value = '';
-            renderTasks();
-        }
-
-        function toggleComplete(index) {
-            tasks[index].completed = !tasks[index].completed;
-            renderTasks();
-        }
-
-        function toggleFavorite(index) {
-            tasks[index].favorite = !tasks[index].favorite;
-            renderTasks();
-        }
-
-        function deleteTask(index) {
-            if (confirm('Deseja excluir essa tarefa?')) {
-                tasks.splice(index, 1);
-                renderTasks();
-            }
-        }
-
-        function saveTasks() {
-            localStorage.setItem('tasks', JSON.stringify(tasks));
-            alert('✅ Lista salva com sucesso!');
-        }
-
-        function loadTasks() {
-            const saved = localStorage.getItem('tasks');
-            if (saved) {
-                tasks = JSON.parse(saved);
-                renderTasks();
-            }
-        }
-
-        addBtn.addEventListener('click', addTask);
-        saveBtn.addEventListener('click', saveTasks);
-        filterSelect.addEventListener('change', renderTasks);
-
-        loadTasks();
-    </script>
+  <script src="checklist.js"></script>
 </body>
-</html>        
+</html>    
