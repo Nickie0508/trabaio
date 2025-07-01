@@ -54,9 +54,7 @@ function loadNotes() {
 
         const contentDiv = document.createElement('div');
         contentDiv.className = 'content';
-        contentDiv.innerText = note.content.length > 150
-            ? note.content.slice(0, Math.floor(note.content.length * 0.3)) + '...'
-            : note.content;
+        contentDiv.innerText = note.content;
 
         const btnGroup = document.createElement('div');
         btnGroup.className = 'btn-group';
@@ -73,35 +71,29 @@ function loadNotes() {
         li.appendChild(contentDiv);
         li.appendChild(btnGroup);
 
+        li.onclick = () => toggleContent(li);
         noteList.appendChild(li);
     });
 }
 
 function toggleContent(li) {
-    const expanded = li.classList.contains('expanded');
-    if (expanded) {
-        li.classList.remove('expanded');
-    } else {
-        Array.from(noteList.children).forEach(child => child.classList.remove('expanded'));
-        li.classList.add('expanded');
-    }
+    li.classList.toggle('expanded');
 }
 
 function addNote() {
     const title = titleInput.value.trim();
     const content = noteInput.value.trim();
-    if (title === '' || content === '') {
+    if (!title || !content) {
         showNotification('⚠️ Preencha título e anotação!');
         return;
     }
 
     notes.push({ title, content, date: Date.now(), favorite: false });
     saveNotes();
-
     titleInput.value = '';
     noteInput.value = '';
     loadNotes();
-    showNotification('✅ Nota salva! ✍️');
+    showNotification('✅ Nota salva!');
 }
 
 function editNote(index) {
@@ -114,7 +106,7 @@ function editNote(index) {
     notes[index].content = newContent.trim();
     saveNotes();
     loadNotes();
-    showNotification('✅ Nota editada! ✍️');
+    showNotification('✅ Nota editada!');
 }
 
 function deleteNote(index) {
@@ -127,11 +119,9 @@ function deleteNote(index) {
 }
 
 function copyNote(index) {
-    const textToCopy = `Título: ${notes[index].title}\nAnotação: ${notes[index].content}`;
-    navigator.clipboard.writeText(textToCopy).then(() => {
+    const text = `Título: ${notes[index].title}\nAnotação: ${notes[index].content}`;
+    navigator.clipboard.writeText(text).then(() => {
         showNotification('📋 Nota copiada!');
-    }).catch(() => {
-        alert('❌ Falha ao copiar.');
     });
 }
 
@@ -139,10 +129,8 @@ function toggleFavorite(index) {
     notes[index].favorite = !notes[index].favorite;
     saveNotes();
     loadNotes();
-    const msg = notes[index].favorite ? '⭐ Marcada como favorita!' : '✨ Removida dos favoritos!';
-    showNotification(msg);
+    showNotification(notes[index].favorite ? '⭐ Favoritada!' : '⭐ Removida dos favoritos.');
 }
 
 searchInput.addEventListener('input', loadNotes);
-
 loadNotes();
