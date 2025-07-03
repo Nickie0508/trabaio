@@ -9,6 +9,7 @@
       background-color: #f1f6fb;
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       padding: 2rem;
+      margin: 0;
     }
 
     .titulo-centralizado {
@@ -35,6 +36,7 @@
       border: 1px solid #ccc;
       font-size: 1rem;
       min-width: 180px;
+      flex: 1;
     }
 
     .form-metass label {
@@ -52,10 +54,11 @@
       border: none;
       color: white;
       font-weight: bold;
-      padding: 0 1.5rem;
+      padding: 0.6rem 1.5rem;
       border-radius: 12px;
       cursor: pointer;
       transition: background-color 0.3s ease;
+      flex-shrink: 0;
     }
 
     .form-metass button:hover {
@@ -63,6 +66,7 @@
     }
 
     .meta-card {
+      border: 1.5px solid #ddd;
       border-radius: 20px;
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
       background-color: #fff;
@@ -82,6 +86,8 @@
       align-items: center;
       font-weight: 600;
       margin-bottom: 0.5rem;
+      flex-wrap: wrap;
+      gap: 10px;
     }
 
     .progress {
@@ -90,6 +96,7 @@
       background-color: #e0f0fd;
       overflow: hidden;
       position: relative;
+      margin-top: 0.5rem;
     }
 
     .progress-bar {
@@ -161,15 +168,44 @@
       text-decoration: none;
       box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
       transition: background-color 0.3s ease;
+      z-index: 1000;
     }
 
     .botao-voltar:hover {
       background-color: #4a93d5;
     }
+
+    @media (max-width: 600px) {
+      body {
+        padding: 1rem;
+      }
+
+      .form-metass {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .form-metass input,
+      .form-metass button,
+      .form-metass label {
+        width: 100%;
+      }
+
+      .meta-header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .botao-voltar {
+        top: 10px;
+        right: 10px;
+        font-size: 0.9rem;
+        padding: 0.5rem 1rem;
+      }
+    }
   </style>
 </head>
 <body>
-
   <a href="index.html" class="botao-voltar">← Voltar</a>
 
   <h1 class="titulo-centralizado">🌟 Minhas Metas</h1>
@@ -189,4 +225,5 @@
   <script src="metas.js" defer></script>
 </body>
 </html>
+
 
