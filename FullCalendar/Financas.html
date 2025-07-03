@@ -11,29 +11,28 @@
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <style>
     body { background-color: #f1f6fb; }
-    .navbar-dark.bg-dark { background-color: #000b5e !important; }
     .form-control, .btn { border-radius: 10px; }
     .card { border-radius: 15px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
     .progress-bar { background-color: #0056b3; }
+
+    .back-button {
+      position: fixed;
+      top: 15px;
+      right: 15px;
+      background-color: #00AEEF;
+      color: white;
+      padding: 10px 18px;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: bold;
+      z-index: 9999;
+    }
   </style>
 </head>
 <body>
 
-<!-- Navbar -->
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="index.html">Meu Calendário</a>
-    <div class="collapse navbar-collapse">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item"><a class="btn btn-outline-light me-1" href="nota.html">Notas</a></li>
-        <li class="nav-item"><a class="btn btn-outline-light me-1" href="checklist.html">Checklist</a></li>
-        <li class="nav-item"><a class="btn btn-outline-light me-1" href="Financas.html">Finanças</a></li>
-        <li class="nav-item"><a class="btn btn-outline-light me-1" href="metas.html">Metas</a></li>
-      </ul>
-      <button id="sair" class="btn btn-danger"><i class="bi bi-box-arrow-left"></i></button>
-    </div>
-  </div>
-</nav>
+<!-- Botão Voltar -->
+<a href="index.html" class="back-button"><i class="bi bi-arrow-left"></i> Voltar</a>
 
 <div class="container mt-4 mb-5">
   <h2 class="mb-4">📊 Controle Financeiro</h2>
@@ -177,4 +176,3 @@
 
 </body>
 </html>
-
