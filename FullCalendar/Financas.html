@@ -49,6 +49,10 @@
     <div class="progress">
       <div id="barraProgresso" class="progress-bar" role="progressbar" style="width: 0%;">0%</div>
     </div>
+  <div id="alertaLimite" class="alert alert-danger mt-3 d-none" role="alert">
+    🚨 Atenção: Você ultrapassou o limite de gastos definido!
+  </div>
+
   </div>
 
   <div class="card p-3 mb-4">
@@ -198,12 +202,19 @@
   }
 
   function atualizarBarraProgresso() {
+    const alerta = document.getElementById('alertaLimite');
     const total = transacoes.reduce((s, t) => s + t.valor, 0);
     const porcentagem = limiteMensal ? Math.min((total / limiteMensal) * 100, 100) : 0;
     const barra = document.getElementById('barraProgresso');
     barra.style.width = `${porcentagem}%`;
     barra.textContent = `${Math.round(porcentagem)}%`;
     barra.setAttribute('aria-valuenow', porcentagem);
+    if (total > limiteMensal) {
+      alerta.classList.remove('d-none');
+    } else {
+      alerta.classList.add('d-none');
+    }
+
   }
 
   let grafico;
@@ -235,3 +246,4 @@
 
 </body>
 </html>
+
