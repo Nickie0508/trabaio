@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -14,7 +15,6 @@
     .form-control, .btn { border-radius: 10px; }
     .card { border-radius: 15px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
     .progress-bar { background-color: #0056b3; }
-
     .back-button {
       position: fixed;
       top: 15px;
@@ -31,13 +31,11 @@
 </head>
 <body>
 
-<!-- Botão Voltar -->
 <a href="index.html" class="back-button"><i class="bi bi-arrow-left"></i> Voltar</a>
 
 <div class="container mt-4 mb-5">
   <h2 class="mb-4">📊 Controle Financeiro</h2>
 
-  <!-- Limite Mensal -->
   <div class="mb-4">
     <label class="form-label">Limite de gasto mensal (R$):</label>
     <div class="input-group">
@@ -46,7 +44,6 @@
     </div>
   </div>
 
-  <!-- Progresso de Gastos -->
   <div class="mb-4">
     <label class="form-label">Progresso de gastos:</label>
     <div class="progress">
@@ -54,7 +51,6 @@
     </div>
   </div>
 
-  <!-- Formulário de Nova Transação -->
   <div class="card p-3 mb-4">
     <h5>Adicionar Nova Transação</h5>
     <div class="row g-2">
@@ -78,7 +74,6 @@
     </div>
   </div>
 
-  <!-- Lista de Gastos -->
   <div class="card mb-4">
     <div class="card-header"><strong>Gastos Registrados</strong></div>
     <ul id="listaTransacoes" class="list-group list-group-flush"></ul>
@@ -87,10 +82,15 @@
     </div>
   </div>
 
-  <!-- Gráfico de Gastos -->
   <div class="card p-3">
     <h5>Distribuição por Categoria</h5>
     <canvas id="graficoGastos"></canvas>
+  </div>
+
+  <div class="text-center mt-4">
+    <button class="btn btn-danger" onclick="limparTudo()">
+      <i class="bi bi-x-circle"></i> Limpar Tudo
+    </button>
   </div>
 </div>
 
@@ -98,10 +98,27 @@
   let limiteMensal = 0;
   let transacoes = [];
 
+  document.addEventListener('DOMContentLoaded', () => {
+    const limiteSalvo = localStorage.getItem('limiteGasto');
+    if (limiteSalvo) {
+      limiteMensal = parseFloat(limiteSalvo);
+      document.getElementById('limiteGasto').value = limiteMensal;
+    }
+
+    const transacoesSalvas = localStorage.getItem('transacoes');
+    if (transacoesSalvas) {
+      transacoes = JSON.parse(transacoesSalvas);
+      atualizarLista();
+      atualizarBarraProgresso();
+      atualizarGrafico();
+    }
+  });
+
   function salvarLimite() {
     const valor = parseFloat(document.getElementById('limiteGasto').value);
     if (!isNaN(valor) && valor > 0) {
       limiteMensal = valor;
+      localStorage.setItem('limiteGasto', valor);
       atualizarBarraProgresso();
     }
   }
@@ -115,27 +132,69 @@
       transacoes.push({ desc, valor, categoria });
       document.getElementById('desc').value = '';
       document.getElementById('valor').value = '';
-      atualizarLista();
-      atualizarBarraProgresso();
-      atualizarGrafico();
+      atualizarTudo();
     }
+  }
+
+  function atualizarTudo() {
+    localStorage.setItem('transacoes', JSON.stringify(transacoes));
+    atualizarLista();
+    atualizarBarraProgresso();
+    atualizarGrafico();
   }
 
   function atualizarLista() {
     const lista = document.getElementById('listaTransacoes');
     lista.innerHTML = '';
     let total = 0;
-    transacoes.forEach((t, i) => {
+
+    transacoes.forEach((t, index) => {
       total += t.valor;
+
       const item = document.createElement('li');
       item.className = 'list-group-item d-flex justify-content-between align-items-center';
       item.innerHTML = `
         <span>${t.desc} (${t.categoria})</span>
         <span>R$ ${t.valor.toFixed(2)}</span>
+        <div class="btn-group ms-2">
+          <button class="btn btn-sm btn-outline-primary" onclick="editarTransacao(${index})"><i class="bi bi-pencil"></i></button>
+          <button class="btn btn-sm btn-outline-danger" onclick="excluirTransacao(${index})"><i class="bi bi-trash"></i></button>
+        </div>
       `;
       lista.appendChild(item);
     });
+
     document.getElementById('totalGastos').textContent = total.toFixed(2);
+  }
+
+  function editarTransacao(index) {
+    const transacao = transacoes[index];
+    const novaDesc = prompt("Editar descrição:", transacao.desc);
+    const novoValor = parseFloat(prompt("Editar valor:", transacao.valor));
+    const novaCategoria = prompt("Editar categoria:", transacao.categoria);
+
+    if (novaDesc && !isNaN(novoValor) && novaCategoria) {
+      transacoes[index] = { desc: novaDesc, valor: novoValor, categoria: novaCategoria };
+      atualizarTudo();
+    }
+  }
+
+  function excluirTransacao(index) {
+    if (confirm("Deseja excluir esta transação?")) {
+      transacoes.splice(index, 1);
+      atualizarTudo();
+    }
+  }
+
+  function limparTudo() {
+    if (confirm("Tem certeza que deseja apagar todos os dados?")) {
+      transacoes = [];
+      limiteMensal = 0;
+      localStorage.removeItem('transacoes');
+      localStorage.removeItem('limiteGasto');
+      document.getElementById('limiteGasto').value = '';
+      atualizarTudo();
+    }
   }
 
   function atualizarBarraProgresso() {
